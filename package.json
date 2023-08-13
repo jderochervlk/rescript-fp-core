@@ -1,16 +1,30 @@
 {
   "name": "rescript-fp-core",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.6",
   "description": "A standard library for ReScript with a focus on Functional Programming",
-  "main": "src/index.mjs",
-  "scripts": {
-    "res:build": "rescript",
-    "res:dev": "rescript build -w"
-  },
-  "keywords": [],
+  "keywords": [
+    "rescript",
+    "functional programming"
+  ],
   "author": "josh@vlkpack.com",
   "license": "MIT",
+  "scripts": {
+    "build": "rescript",
+    "dev": "rescript build -w",
+    "test": "retest test/**/*.mjs"
+  },
+  "files": [
+    "README.md",
+    "LICENSE",
+    "bsconfig.json",
+    "src/**/*.res",
+    "src/**/*.resi",
+    "src/**/*.mjs"
+  ],
   "dependencies": {
     "rescript": "^10.1.4"
+  },
+  "devDependencies": {
+
   }
 }
