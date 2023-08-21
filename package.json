@@ -11,7 +11,7 @@
   "scripts": {
     "build": "rescript",
     "dev": "rescript build -w",
-    "test": "retest test/**/*.mjs"
+    "test": "vitest --watch"
   },
   "files": [
     "README.md",
@@ -25,6 +25,10 @@
     "rescript": "^10.1.4"
   },
   "devDependencies": {
-
+    "@jihchi/vite-plugin-rescript": "^5.3.0",
+    "@vitest/ui": "^0.34.2",
+    "rescript-vitest": "^1.2.0",
+    "vite-plugin-rescript": "^0.0.1",
+    "vitest": "^0.31.4"
   }
 }

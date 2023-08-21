@@ -29,6 +29,7 @@ let isEmpty = arr => {
   | None => true
   }
 }
+
 // isNoneEmpty
 // flatten
 // append
@@ -39,7 +40,6 @@ let isEmpty = arr => {
 // every
 // findFirst
 // findIndex
-
 // insertAt
 // last
 // lookup

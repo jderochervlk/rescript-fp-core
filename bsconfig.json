@@ -18,6 +18,14 @@
     }
   ],
   "suffix": ".mjs",
-  "bs-dependencies": [],
-  "bs-dev-dependencies": []
+  "bs-dependencies": [
+  ],
+  "bs-dev-dependencies": [
+    "rescript-vitest"
+  ],
+  "warnings": {
+    "number": "-44"
+  },
+  "ppx-flags": [
+  ]
 }
