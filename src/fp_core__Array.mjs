@@ -26,6 +26,25 @@ function isEmpty(arr) {
   return match === undefined;
 }
 
+function last(arr) {
+  var index = arr.length - 1 | 0;
+  return arr[index];
+}
+
+function append(arr, t) {
+  return [t].concat(arr);
+}
+
+function prepend(arr, t) {
+  return arr.concat([t]);
+}
+
+function flatten(arr) {
+  return arr.reduce((function (t1, t2) {
+                return t1.concat(t2);
+              }), []);
+}
+
 export {
   reduce ,
   reduceWithIndex ,
@@ -33,5 +52,9 @@ export {
   reduceRightWithIndex ,
   head ,
   isEmpty ,
+  last ,
+  append ,
+  prepend ,
+  flatten ,
 }
 /* No side effect */

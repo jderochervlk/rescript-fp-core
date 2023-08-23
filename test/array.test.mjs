@@ -97,6 +97,218 @@ Vitest.test("head", undefined, (function (param) {
                   ])).toEqual(1);
       }));
 
+Vitest.test("isEmpty", undefined, (function (param) {
+        Vitest$1.expect(Fp_core__Array.isEmpty([])).toEqual(true);
+        Vitest$1.expect(Fp_core__Array.isEmpty([
+                    1,
+                    2,
+                    3
+                  ])).toEqual(false);
+      }));
+
+Vitest.test("lentgh", undefined, (function (param) {
+        Vitest$1.expect([
+                1,
+                2,
+                3
+              ].length).toEqual(3);
+      }));
+
+Vitest.test("size", undefined, (function (param) {
+        Vitest$1.expect([
+                1,
+                2,
+                3
+              ].length).toEqual(3);
+      }));
+
+Vitest.test("concat", undefined, (function (param) {
+        Vitest$1.expect([
+                  1,
+                  2,
+                  3
+                ].concat([
+                    4,
+                    5,
+                    6
+                  ])).toEqual([
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]);
+      }));
+
+Vitest.test("copy", undefined, (function (param) {
+        Vitest$1.expect([
+                  1,
+                  2,
+                  3
+                ].slice()).toEqual([
+              1,
+              2,
+              3
+            ]);
+      }));
+
+Vitest.test("every", undefined, (function (param) {
+        Vitest$1.expect([
+                  1,
+                  1,
+                  1
+                ].every(function (n) {
+                    return n === 1;
+                  })).toEqual(true);
+        Vitest$1.expect([
+                  1,
+                  2,
+                  3
+                ].every(function (n) {
+                    return n === 1;
+                  })).toEqual(false);
+      }));
+
+Vitest.test("findFirst", undefined, (function (param) {
+        Vitest$1.expect([
+                  1,
+                  2,
+                  3
+                ].find(function (n) {
+                    return n === 1;
+                  })).toEqual(1);
+      }));
+
+Vitest.test("findIndex", undefined, (function (param) {
+        Vitest$1.expect([
+                  1,
+                  2,
+                  3
+                ].findIndex(function (n) {
+                    return n === 1;
+                  })).toEqual(0);
+        Vitest$1.expect([
+                  1,
+                  2,
+                  3
+                ].findIndex(function (n) {
+                    return n === 10;
+                  })).toEqual(-1);
+      }));
+
+Vitest.test("some", undefined, (function (param) {
+        Vitest$1.expect([
+                  1,
+                  2,
+                  3
+                ].some(function (n) {
+                    return n === 1;
+                  })).toEqual(true);
+        Vitest$1.expect([
+                  1,
+                  2,
+                  3
+                ].some(function (n) {
+                    return n === 10;
+                  })).toEqual(false);
+      }));
+
+Vitest.test("someWithIndex", undefined, (function (param) {
+        Vitest$1.expect([
+                  1,
+                  2,
+                  3
+                ].some(function (n, i) {
+                    return (n + i | 0) === 1;
+                  })).toEqual(true);
+        Vitest$1.expect([
+                  1,
+                  2,
+                  3
+                ].some(function (n, i) {
+                    return (n + i | 0) === 10;
+                  })).toEqual(false);
+      }));
+
+Vitest.test("last", undefined, (function (param) {
+        Vitest$1.expect(Fp_core__Array.last([
+                    1,
+                    2,
+                    3
+                  ])).toEqual(3);
+        Vitest$1.expect(Fp_core__Array.last([])).toEqual(undefined);
+      }));
+
+Vitest.test("append", undefined, (function (param) {
+        Vitest$1.expect(Fp_core__Array.append([
+                    2,
+                    3
+                  ], 1)).toEqual([
+              1,
+              2,
+              3
+            ]);
+      }));
+
+Vitest.test("prepend", undefined, (function (param) {
+        Vitest$1.expect(Fp_core__Array.prepend([
+                    2,
+                    3
+                  ], 1)).toEqual([
+              2,
+              3,
+              1
+            ]);
+      }));
+
+Vitest.test("flatten", undefined, (function (param) {
+        Vitest$1.expect(Fp_core__Array.flatten([
+                    [
+                      1,
+                      2
+                    ],
+                    [
+                      3,
+                      4
+                    ],
+                    [
+                      5,
+                      6
+                    ]
+                  ])).toEqual([
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]);
+      }));
+
+Vitest.test("splice", undefined, (function (param) {
+        Vitest$1.expect([
+                  1,
+                  2,
+                  3
+                ].toSpliced(1, 0, 5)).toEqual([
+              1,
+              5,
+              2,
+              3
+            ]);
+        Vitest$1.expect([
+                  1,
+                  2,
+                  3
+                ].toSpliced(2, 1, 7, 8)).toEqual([
+              1,
+              2,
+              7,
+              8
+            ]);
+      }));
+
 export {
   
 }
