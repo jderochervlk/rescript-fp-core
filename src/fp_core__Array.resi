@@ -88,3 +88,30 @@ The splice() function returns a new array with some elements removed and/or repl
 @send
 external splice: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => array<'a> =
   "toSpliced"
+
+/**
+## `sort`
+The sort function returns a sorted copy of the array using a compare function.
+
+The compare function takes in two elements of the array at a time, `(a,b)`
+and it will sort the items depending on the int returned.
+
+`> 0` - sort a after b, e.g. [b, a]
+
+`< 0` -	sort a before b, e.g. [a, b]
+
+`=== 0` - keep original order of a and b
+
+### Example
+```rescript
+[3, 6, 2]->Array.sort((a, b) => a > b ? 0 : -1) // => [2, 3, 6]
+```
+*/
+@send
+external sort: (array<'a>, ('a, 'a) => int) => array<'a> = "toSorted"
+
+/**
+This function provides a safe way to read a value at a particular index from an array. 
+It returns a `none` if the index is out of bounds, and a `some` of the element if the index is valid.
+*/
+let lookup: (array<'a>, int) => option<'a>

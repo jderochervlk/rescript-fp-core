@@ -1,4 +1,7 @@
-// v1
+// opening belt to modify the behavior of array[0]
+// when belt is open this returns an option<'a> instead of 'a
+open Belt
+
 @send external map: (array<'a>, 'a => 'b) => array<'b> = "map"
 
 @send external mapWithIndex: (array<'a>, ('a, int) => 'b) => array<'b> = "map"
@@ -43,9 +46,7 @@ let isEmpty = arr => {
 
 @send external findIndex: (array<'a>, 'a => bool) => int = "findIndex"
 
-// TODO: Core__Ordering?
-// @send external toSorted: (array<'a>, ('a, 'a) => Core__Ordering.t) => array<'a> = "toSorted"
-// @send external sort: (array<'a>, ('a, 'a) => Core__Ordering.t) => array<'a> = "toSorted"
+@send external sort: (array<'a>, ('a, 'a) => int) => array<'a> = "toSorted"
 
 @send external some: (array<'a>, 'a => bool) => bool = "some"
 @send external someWithIndex: (array<'a>, ('a, int) => bool) => bool = "some"
@@ -71,9 +72,11 @@ let flatten = arr => {
 external splice: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => array<'a> =
   "toSpliced"
 
+let lookup = (arr: array<'a>, i): option<'a> => arr[i]
+
 // deleteAt
 // insertAt
-// lookup
+
 // modifyAt
 // reverse
 // splitAt

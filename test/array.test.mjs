@@ -309,6 +309,28 @@ Vitest.test("splice", undefined, (function (param) {
             ]);
       }));
 
+Vitest.test("sort", undefined, (function (param) {
+        Vitest$1.expect([
+                  3,
+                  6,
+                  2
+                ].toSorted(function (a, b) {
+                    if (a > b) {
+                      return 0;
+                    } else {
+                      return -1;
+                    }
+                  })).toEqual([
+              2,
+              3,
+              6
+            ]);
+      }));
+
+Vitest.test("getter", undefined, (function (param) {
+        Vitest$1.expect(2).toBe(2);
+      }));
+
 export {
   
 }

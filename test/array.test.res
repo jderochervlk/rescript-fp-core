@@ -104,3 +104,11 @@ test("splice", _ => {
   [1, 2, 3]->Array.splice(~start=1, ~insert=[5], ~remove=0)->expect->toEqual([1, 5, 2, 3])
   [1, 2, 3]->Array.splice(~start=2, ~insert=[7, 8], ~remove=1)->expect->toEqual([1, 2, 7, 8])
 })
+
+test("sort", _ => {
+  [3, 6, 2]->Array.sort((a, b) => a > b ? 0 : -1)->expect->toEqual([2, 3, 6])
+})
+
+test("getter", _ => {
+  [1, 2, 3][1]->expect->toBe(Some(2))
+})
