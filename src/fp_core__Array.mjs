@@ -20,15 +20,6 @@ function reduceRightWithIndex(arr, init, f) {
   return arr.reduceRight(f, init);
 }
 
-function head(arr) {
-  return arr[0];
-}
-
-function isEmpty(arr) {
-  var match = arr[0];
-  return match === undefined;
-}
-
 function last(arr) {
   var index = arr.length - 1 | 0;
   return arr[index];
@@ -56,6 +47,20 @@ function slice(arr, start, end) {
     return arr.slice(start, end);
   }
   
+}
+
+function head(arr) {
+  return arr[0];
+}
+
+function tail(arr) {
+  var len = arr.length;
+  return slice(arr, 0, len);
+}
+
+function isEmpty(arr) {
+  var match = arr[0];
+  return match === undefined;
 }
 
 function deleteAt(arr, i) {
@@ -92,12 +97,23 @@ function modifyAt(arr, i, updateFn) {
   
 }
 
+function updateAt(arr, i, item) {
+  var len = arr.length;
+  var head = i === 0 ? slice(arr, -1, 0) : slice(arr, 0, i);
+  var tail = slice(arr, i + 1 | 0, len);
+  if (head !== undefined && tail !== undefined) {
+    return head.concat([item]).concat(tail);
+  }
+  
+}
+
 export {
   reduce ,
   reduceWithIndex ,
   reduceRight ,
   reduceRightWithIndex ,
   head ,
+  tail ,
   isEmpty ,
   last ,
   append ,
@@ -108,5 +124,6 @@ export {
   deleteAt ,
   insertAt ,
   modifyAt ,
+  updateAt ,
 }
 /* No side effect */

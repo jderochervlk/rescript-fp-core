@@ -36,6 +36,13 @@ test("get", _ => {
 
 test("head", _ => {
   [1, 2, 3]->Array.head->expect->toEqual(Some(1))
+  []->Array.head->expect->toEqual(None)
+})
+
+test("tail", _ => {
+  [1, 2, 3]->Array.tail->expect->toEqual(Some([2, 3]))
+  [1]->Array.tail->expect->toEqual(None)
+  []->Array.tail->expect->toEqual(None)
 })
 
 test("isEmpty", _ => {
@@ -144,4 +151,14 @@ test("modifyAt", _ => {
   [1, 2, 3]->Array.modifyAt(0, n => n + 100)->expect->toEqual(Some([101, 2, 3]))
   [1, 2, 3]->Array.modifyAt(100, n => n + 100)->expect->toEqual(None)
   []->Array.modifyAt(100, n => n + 100)->expect->toEqual(None)
+})
+
+test("updateAt", _ => {
+  [1, 2, 3]->Array.updateAt(0, 100)->expect->toEqual(Some([100, 2, 3]))
+  [1, 2, 3]->Array.updateAt(100, 100)->expect->toEqual(None)
+  []->Array.updateAt(100, 100)->expect->toEqual(None)
+})
+
+test("reverse", _ => {
+  [1, 2, 3]->Array.reverse->expect->toEqual([3, 2, 1])
 })

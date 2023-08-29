@@ -95,6 +95,20 @@ Vitest.test("head", undefined, (function (param) {
                     2,
                     3
                   ])).toEqual(1);
+        Vitest$1.expect(Fp_core__Array.head([])).toEqual(undefined);
+      }));
+
+Vitest.test("tail", undefined, (function (param) {
+        Vitest$1.expect(Fp_core__Array.tail([
+                    1,
+                    2,
+                    3
+                  ])).toEqual([
+              2,
+              3
+            ]);
+        Vitest$1.expect(Fp_core__Array.tail([1])).toEqual(undefined);
+        Vitest$1.expect(Fp_core__Array.tail([])).toEqual(undefined);
       }));
 
 Vitest.test("isEmpty", undefined, (function (param) {
@@ -478,6 +492,36 @@ Vitest.test("modifyAt", undefined, (function (param) {
         Vitest$1.expect(Fp_core__Array.modifyAt([], 100, (function (n) {
                       return n + 100 | 0;
                     }))).toEqual(undefined);
+      }));
+
+Vitest.test("updateAt", undefined, (function (param) {
+        Vitest$1.expect(Fp_core__Array.updateAt([
+                    1,
+                    2,
+                    3
+                  ], 0, 100)).toEqual([
+              100,
+              2,
+              3
+            ]);
+        Vitest$1.expect(Fp_core__Array.updateAt([
+                    1,
+                    2,
+                    3
+                  ], 100, 100)).toEqual(undefined);
+        Vitest$1.expect(Fp_core__Array.updateAt([], 100, 100)).toEqual(undefined);
+      }));
+
+Vitest.test("reverse", undefined, (function (param) {
+        Vitest$1.expect([
+                  1,
+                  2,
+                  3
+                ].toReversed()).toEqual([
+              3,
+              2,
+              1
+            ]);
       }));
 
 export {

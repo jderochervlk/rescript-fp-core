@@ -1,5 +1,4 @@
-// ## JS Api methods
-// ## Docs come from MDN and fp-ts
+// Docs come from MDN and fp-ts
 
 /**
 ## `map`
@@ -41,7 +40,28 @@ let reduceRightWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
 
 @get_index external get: (array<'a>, int) => option<'a> = ""
 
+/**
+## `head`
+Get the first element in an array, or None if the array is empty
+
+### Example
+```rescript
+[1, 2, 3]->Array.head // => Some(1)
+[]->Array.head // => None
+*/
 let head: array<'a> => option<'a>
+
+/**
+## `tail`
+Get all but the first element of an array, creating a new array, or None if the array is empty
+
+### Example
+```rescript
+[1, 2, 3]->Array.tail // => Some([2, 3])
+[1]->Array.tail // =>None
+```
+*/
+let tail: array<'a> => option<array<'a>>
 
 let isEmpty: array<'a> => bool
 
@@ -183,3 +203,26 @@ Apply a function to the element at the specified index, creating a new array, or
 ```
 */
 let modifyAt: (array<'a>, int, 'a => 'a) => option<array<'a>>
+
+/**
+## `updateAt`
+Change the element at the specified index, creating a new array, or returning None if the index is out of bounds.
+
+### Example
+```rescript
+[1, 2, 3]->Array.updateAt(0, 100) // =>Some([100, 2, 3])
+[1, 2, 3]->Array.updateAt(100, 100) // => None
+```
+*/
+let updateAt: (array<'a>, int, 'a) => option<array<'a>>
+
+/**
+## `reverse`
+Reverse an array, creating a new array
+### Example
+```rescript
+[1, 2, 3]->Array.reverse // => [3, 2, 1]
+```
+*/
+@send
+external reverse: array<'a> => array<'a> = "toReversed"

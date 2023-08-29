@@ -24,15 +24,6 @@ let reduceRightWithIndex = (arr, init, f) => reduceRightWithIndex(arr, f, init)
 
 @get_index external get: (array<'a>, int) => option<'a> = ""
 
-let head = arr => arr->get(0)
-
-let isEmpty = arr => {
-  switch arr->head {
-  | Some(_) => false
-  | None => true
-  }
-}
-
 @get external size: array<'a> => int = "length"
 @get external length: array<'a> => int = "length"
 
@@ -51,6 +42,12 @@ let isEmpty = arr => {
 @send external some: (array<'a>, 'a => bool) => bool = "some"
 @send external someWithIndex: (array<'a>, ('a, int) => bool) => bool = "some"
 
+@variadic @send
+external splice: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => array<'a> =
+  "toSpliced"
+
+@send external unsafeSlice: (array<'a>, int, int) => array<'a> = "slice"
+
 let last = arr => {
   let index = arr->size - 1
   arr->get(index)
@@ -68,19 +65,27 @@ let flatten = arr => {
   arr->reduce([], (t1, t2) => t1->concat(t2))
 }
 
-@variadic @send
-external splice: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => array<'a> =
-  "toSpliced"
-
 let lookup = (arr: array<'a>, i): option<'a> => arr[i]
-
-@send external unsafeSlice: (array<'a>, int, int) => array<'a> = "slice"
 
 let slice = (arr, start, end) => {
   let len = arr->length
   switch len >= end && start < end && start < len {
   | true => Some(arr->unsafeSlice(start, end))
   | false => None
+  }
+}
+
+let head = arr => arr->get(0)
+
+let tail = arr => {
+  let len = arr->length
+  arr->slice(0, len)
+}
+
+let isEmpty = arr => {
+  switch arr->head {
+  | Some(_) => false
+  | None => true
   }
 }
 
@@ -114,15 +119,20 @@ let modifyAt = (arr, i, updateFn) => {
   | _ => None
   }
 }
-// reverse
-// splitAt
-// tail
-// updateAt
-// zero
+
+@send external reverse: array<'a> => array<'a> = "toReversed"
+
+let updateAt = (arr, i, item) => {
+  let len = arr->length
+  let head = i == 0 ? arr->slice(-1, 0) : arr->slice(0, i)
+  let tail = arr->slice(i + 1, len)
+  switch (head, tail) {
+  | (Some(a), Some(b)) => Some(a->concat([item])->concat(b))
+  | _ => None
+  }
+}
 
 // next release
-// sort
-// soryBy
 // chop
 // compact
 // filterMap
