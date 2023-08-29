@@ -5,6 +5,8 @@
 ## `map`
 The `map` function creates a new array populated with the results of calling a provided function on every element in the calling array. 
 
+Zero-cost binding to Javascript's `Array.prototype.map`.
+
 ### Example
 ```rescript
 [1, 2, 3]->Array.map(n => n + 1) // => [2,3,4]
@@ -16,6 +18,8 @@ external map: (array<'a>, 'a => 'b) => array<'b> = "map"
 /**
 ## `mapWithIndex`
 Similar to `map` but it also includes the array index of each item.
+
+Zero-cost binding to Javascript's `Array.prototype.map`.
 
 ### Example
 ```rescript
@@ -144,7 +148,38 @@ Returns `None` if start or end are out of bounds, or if start is greater than en
 let slice: (array<'a>, int, int) => option<array<'a>>
 
 /**
-deleteAt
+## `deleteAt`
 Delete the element at the specified index, creating a new array, or returning None if the index is out of bounds.
+
+### Example
+```rescript
+[1, 2, 3, 4]->Array.deleteAt(0) // => Some([2, 3, 4])
+[1, 2, 3, 4]->Array.deleteAt(10) // => None
+```
 */
 let deleteAt: (array<'a>, int) => option<array<'a>>
+
+/**
+## `insertAt`
+Inserts an element at the specified index, creating a new array, or returning `None` if the index is out of bounds.
+
+### Example
+```rescript
+[1, 2, 3, 4]->Array.insertAt(0, 100) // => Some([100, 1, 2, 3, 4])
+[1, 2, 3, 4]->Array.insertAt(10, 100) // => None
+[]->Array.insertAt(0, 100)->expect-> // => Some([100])
+```
+*/
+let insertAt: (array<'a>, int, 'a) => option<array<'a>>
+
+/**
+## `modifyAt`
+Apply a function to the element at the specified index, creating a new array, or returning `None` if the index is out of bounds.
+
+### Example
+```rescript
+[1, 2, 3]->Array.modifyAt(0, n => n + 100) // => Some([101, 2, 3]))
+[1, 2, 3]->Array.modifyAt(100, n => n + 100) // => None
+```
+*/
+let modifyAt: (array<'a>, int, 'a => 'a) => option<array<'a>>

@@ -85,13 +85,35 @@ let slice = (arr, start, end) => {
 }
 
 let deleteAt = (arr, i) => {
-  let head = arr->unsafeSlice(0, i)
-  Some(head)
+  let head = i == 0 ? arr->slice(-1, 0) : arr->slice(0, i)
+  let tail = arr->slice(i + 1, arr->length)
+  switch (head, tail) {
+  | (Some(a), Some(b)) => Some(a->concat(b))
+  | _ => None
+  }
 }
-// deleteAt
-// insertAt
 
-// modifyAt
+let insertAt = (arr, i, item) => {
+  let len = arr->length
+  let head = i == 0 ? arr->slice(-1, 0) : arr->slice(0, i)
+  let tail = arr->slice(i, len)
+  switch (head, tail, len) {
+  | (Some(a), Some(b), _) => Some(a->concat([item])->concat(b))
+  | (_, _, 0) => Some([item])
+  | _ => None
+  }
+}
+
+let modifyAt = (arr, i, updateFn) => {
+  let len = arr->length
+  let item = arr[i]
+  let head = i == 0 ? arr->slice(-1, 0) : arr->slice(0, i)
+  let tail = arr->slice(i + 1, len)
+  switch (head, tail, item) {
+  | (Some(a), Some(b), Some(i)) => Some(a->concat([updateFn(i)])->concat(b))
+  | _ => None
+  }
+}
 // reverse
 // splitAt
 // tail

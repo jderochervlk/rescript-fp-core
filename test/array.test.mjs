@@ -393,6 +393,93 @@ Vitest.test("slice", undefined, (function (param) {
                   ], 0, 10)).toEqual(undefined);
       }));
 
+Vitest.test("deleteAt", undefined, (function (param) {
+        Vitest$1.expect(Fp_core__Array.deleteAt([
+                    1,
+                    2,
+                    3,
+                    4
+                  ], 1)).toEqual([
+              1,
+              3,
+              4
+            ]);
+        Vitest$1.expect(Fp_core__Array.deleteAt([
+                    1,
+                    2,
+                    3,
+                    4
+                  ], 0)).toEqual([
+              2,
+              3,
+              4
+            ]);
+        Vitest$1.expect(Fp_core__Array.deleteAt([
+                    1,
+                    2,
+                    3,
+                    4
+                  ], 10)).toEqual(undefined);
+      }));
+
+Vitest.test("insertAt", undefined, (function (param) {
+        Vitest$1.expect(Fp_core__Array.insertAt([
+                    1,
+                    2,
+                    3,
+                    4
+                  ], 1, 100)).toEqual([
+              1,
+              100,
+              2,
+              3,
+              4
+            ]);
+        Vitest$1.expect(Fp_core__Array.insertAt([
+                    1,
+                    2,
+                    3,
+                    4
+                  ], 0, 100)).toEqual([
+              100,
+              1,
+              2,
+              3,
+              4
+            ]);
+        Vitest$1.expect(Fp_core__Array.insertAt([
+                    1,
+                    2,
+                    3,
+                    4
+                  ], 10, 100)).toEqual(undefined);
+        Vitest$1.expect(Fp_core__Array.insertAt([], 0, 100)).toEqual([100]);
+      }));
+
+Vitest.test("modifyAt", undefined, (function (param) {
+        Vitest$1.expect(Fp_core__Array.modifyAt([
+                    1,
+                    2,
+                    3
+                  ], 0, (function (n) {
+                      return n + 100 | 0;
+                    }))).toEqual([
+              101,
+              2,
+              3
+            ]);
+        Vitest$1.expect(Fp_core__Array.modifyAt([
+                    1,
+                    2,
+                    3
+                  ], 100, (function (n) {
+                      return n + 100 | 0;
+                    }))).toEqual(undefined);
+        Vitest$1.expect(Fp_core__Array.modifyAt([], 100, (function (n) {
+                      return n + 100 | 0;
+                    }))).toEqual(undefined);
+      }));
+
 export {
   
 }

@@ -126,3 +126,22 @@ test("slice", _ => {
   [1, 2, 3, 4]->Array.slice(2, 1)->expect->toEqual(None)
   [1, 2, 3, 4]->Array.slice(0, 10)->expect->toEqual(None)
 })
+
+test("deleteAt", _ => {
+  [1, 2, 3, 4]->Array.deleteAt(1)->expect->toEqual(Some([1, 3, 4]))
+  [1, 2, 3, 4]->Array.deleteAt(0)->expect->toEqual(Some([2, 3, 4]))
+  [1, 2, 3, 4]->Array.deleteAt(10)->expect->toEqual(None)
+})
+
+test("insertAt", _ => {
+  [1, 2, 3, 4]->Array.insertAt(1, 100)->expect->toEqual(Some([1, 100, 2, 3, 4]))
+  [1, 2, 3, 4]->Array.insertAt(0, 100)->expect->toEqual(Some([100, 1, 2, 3, 4]))
+  [1, 2, 3, 4]->Array.insertAt(10, 100)->expect->toEqual(None)
+  []->Array.insertAt(0, 100)->expect->toEqual(Some([100]))
+})
+
+test("modifyAt", _ => {
+  [1, 2, 3]->Array.modifyAt(0, n => n + 100)->expect->toEqual(Some([101, 2, 3]))
+  [1, 2, 3]->Array.modifyAt(100, n => n + 100)->expect->toEqual(None)
+  []->Array.modifyAt(100, n => n + 100)->expect->toEqual(None)
+})
