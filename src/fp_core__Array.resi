@@ -1,12 +1,12 @@
 // Docs come from MDN and fp-ts
 
 /**
-## `map`
+### `map`
 The `map` function creates a new array populated with the results of calling a provided function on every element in the calling array. 
 
 Zero-cost binding to Javascript's `Array.prototype.map`.
 
-### Example
+#### Example
 ```rescript
 [1, 2, 3]->Array.map(n => n + 1) // => [2,3,4]
 ```
@@ -15,12 +15,12 @@ Zero-cost binding to Javascript's `Array.prototype.map`.
 external map: (array<'a>, 'a => 'b) => array<'b> = "map"
 
 /**
-## `mapWithIndex`
+### `mapWithIndex`
 Similar to `map` but it also includes the array index of each item.
 
 Zero-cost binding to Javascript's `Array.prototype.map`.
 
-### Example
+#### Example
 ```rescript
 [1, 2, 3]->Array.mapWithIndex((n, i) => n + i) // => [1, 3, 5]
 ```
@@ -28,23 +28,105 @@ Zero-cost binding to Javascript's `Array.prototype.map`.
 @send
 external mapWithIndex: (array<'a>, ('a, int) => 'b) => array<'b> = "map"
 
-@send external filter: (array<'a>, 'a => bool) => array<'a> = "filter"
+/**
+### `filter`
+Given an iterating function that is a Predicate or a Refinement, filter creates a new Array containing the elements of the original Array for which the iterating function is true.
 
-let reduce: (array<'a>, 'b, ('b, 'a) => 'b) => 'b
+Zero-cost binding to Javascript's `Array.prototype.filter`.
 
-let reduceWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
-
-let reduceRight: (array<'a>, 'b, ('b, 'a) => 'b) => 'b
-
-let reduceRightWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
-
-@get_index external get: (array<'a>, int) => option<'a> = ""
+#### Example
+```rescript
+[1, 2, 3]->Array.filter(n => n <= 2) // => [1, 2]
+```
+*/
+@send
+external filter: (array<'a>, 'a => bool) => array<'a> = "filter"
 
 /**
-## `head`
+### `filterWithIndex`
+Similar to `filter` but it includes the item's index.
+
+Zero-cost binding to Javascript's `Array.prototype.filter`.
+
+#### Example
+```rescript
+[1, 2, 3]->Array.filterWithIndex((_, i) => i < 1) // => [1]
+```
+*/
+@send
+external filterWithIndex: (array<'a>, ('a, int) => bool) => array<'a> = "filter"
+
+/**
+### `reduce`
+Reduces an Array.
+
+reduce executes the supplied iterating function on each element of the array, in order, passing in the element and the return value from the calculation on the preceding element.
+
+The first time that the iterating function is called there is no “return value of the previous calculation”, the initial value is used in its place.
+
+Zero-cost binding to Javascript's `Array.prototype.reduce`.
+
+#### Example
+```rescript
+[1, 2, 3]->Array.reduce(0, (item, acc) => item + acc) // => 6
+```
+*/
+let reduce: (array<'a>, 'b, ('b, 'a) => 'b) => 'b
+
+/**
+### `reduceWithIndex`
+Similar to `reduce` but it includes each item's index.
+
+Zero-cost binding to Javascript's `Array.prototype.reduce`.
+
+#### Example
+```rescript
+[1, 2, 3]->Array.reduceWithIndex(0, (item, i, acc) => item + i + acc) // => 9
+```
+*/
+let reduceWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
+
+/**
+Same as `reduce` but applied from the end to the start.
+
+Zero-cost binding to Javascript's `Array.prototype.reduceRight`.
+
+#### Example
+```rescript
+[1, 2, 3]->Array.reduceRight(0, (item, acc) => item + acc) // => 6
+```
+*/
+let reduceRight: (array<'a>, 'b, ('b, 'a) => 'b) => 'b
+
+/**
+Same as `reduceRight` but includes the index for each item.
+
+Zero-cost binding to Javascript's `Array.prototype.reduceRight`.
+
+#### Example
+```rescript
+[1, 2, 3]->Array.reduceRightWithIndex(0, (item, i, acc) => item + i + acc) // => 9
+```
+*/
+let reduceRightWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
+
+/**
+### `get`
+Gets the value from the given index, or `None` if the index is out of bounds.
+
+#### Example
+```rescript
+[1, 2, 3]->Array.get(1) // => Some(2)
+```
+*/
+@get_index
+external get: (array<'a>, int) => option<'a> = ""
+
+/**
+### `head`
 Get the first element in an array, or None if the array is empty
 
-### Example
+#### Example
 ```rescript
 [1, 2, 3]->Array.head // => Some(1)
 []->Array.head // => None
@@ -52,10 +134,10 @@ Get the first element in an array, or None if the array is empty
 let head: array<'a> => option<'a>
 
 /**
-## `tail`
+### `tail`
 Get all but the first element of an array, creating a new array, or None if the array is empty
 
-### Example
+#### Example
 ```rescript
 [1, 2, 3]->Array.tail // => Some([2, 3])
 [1]->Array.tail // =>None
@@ -63,9 +145,20 @@ Get all but the first element of an array, creating a new array, or None if the 
 */
 let tail: array<'a> => option<array<'a>>
 
+/**
+### `isEmpty`
+Test whether an array is empty
+
+#### Example
+```rescript
+[]->Array.isEmpty // => true
+[1, 2, 3]->Array.isEmpty // => false
+```
+*/
 let isEmpty: array<'a> => bool
 
 @get external size: array<'a> => int = "length"
+
 @get external length: array<'a> => int = "length"
 
 @send external concat: (array<'a>, array<'a>) => array<'a> = "concat"
@@ -89,10 +182,10 @@ let append: (array<'a>, 'a) => array<'a>
 let prepend: (array<'a>, 'a) => array<'a>
 
 /**
-## `flatten`
+### `flatten`
 Takes an array of arrays of `'a` and flattens them into an array of `'a` by concatenating the elements of each array in order.
 
-### Example
+#### Example
 ```rescript
 [[1, 2], [3, 4], [5, 6]]->Array.flatten // => [1, 2, 3, 4, 5, 6]
 ```
@@ -100,10 +193,10 @@ Takes an array of arrays of `'a` and flattens them into an array of `'a` by conc
 let flatten: array<array<'a>> => array<'a>
 
 /**
-## `splice`
+### `splice`
 The splice() function returns a new array with some elements removed and/or replaced at a given index.
 
-### Example
+#### Example
 ```rescript
 [1, 2, 3]->Array.splice(~start=2, ~insert=[7, 8], ~remove=1) // => [1, 2, 7, 8]
 ```
@@ -114,7 +207,7 @@ external splice: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => a
   "toSpliced"
 
 /**
-## `sort`
+### `sort`
 The sort function returns a sorted copy of the array using a compare function.
 
 The compare function takes in two elements of the array at a time, `(a,b)`
@@ -126,7 +219,7 @@ and it will sort the items depending on the int returned.
 
 `=== 0` - keep original order of a and b
 
-### Example
+#### Example
 ```rescript
 [3, 6, 2]->Array.sort((a, b) => a > b ? 0 : -1) // => [2, 3, 6]
 ```
@@ -141,7 +234,7 @@ It returns a `none` if the index is out of bounds, and a `some` of the element i
 let lookup: (array<'a>, int) => option<'a>
 
 /**
-## `unsafeSlice`
+### `unsafeSlice`
 Similar to `slice` but will return `array<'a>` instead of `Some<array<'a>>` and empty array instead of `None`
 
 ```rescript
@@ -153,13 +246,13 @@ Similar to `slice` but will return `array<'a>` instead of `Some<array<'a>>` and 
 external unsafeSlice: (array<'a>, int, int) => array<'a> = "slice"
 
 /**
-## `slice`
+### `slice`
 Slices the array starting at the first int and ending just before the second int.
 
 Returns `Some<array<'a>>` if start and end are in bounds.
 Returns `None` if start or end are out of bounds, or if start is greater than end.
 
-### Example
+#### Example
 ```rescript
 [1, 2, 3, 4]->Array.slice(1, 4) // => Some([2, 3, 4])
 [1, 2, 3, 4]->Array.slice(10, 20) // => None
@@ -168,10 +261,10 @@ Returns `None` if start or end are out of bounds, or if start is greater than en
 let slice: (array<'a>, int, int) => option<array<'a>>
 
 /**
-## `deleteAt`
+### `deleteAt`
 Delete the element at the specified index, creating a new array, or returning None if the index is out of bounds.
 
-### Example
+#### Example
 ```rescript
 [1, 2, 3, 4]->Array.deleteAt(0) // => Some([2, 3, 4])
 [1, 2, 3, 4]->Array.deleteAt(10) // => None
@@ -180,10 +273,10 @@ Delete the element at the specified index, creating a new array, or returning No
 let deleteAt: (array<'a>, int) => option<array<'a>>
 
 /**
-## `insertAt`
+### `insertAt`
 Inserts an element at the specified index, creating a new array, or returning `None` if the index is out of bounds.
 
-### Example
+#### Example
 ```rescript
 [1, 2, 3, 4]->Array.insertAt(0, 100) // => Some([100, 1, 2, 3, 4])
 [1, 2, 3, 4]->Array.insertAt(10, 100) // => None
@@ -193,10 +286,10 @@ Inserts an element at the specified index, creating a new array, or returning `N
 let insertAt: (array<'a>, int, 'a) => option<array<'a>>
 
 /**
-## `modifyAt`
+### `modifyAt`
 Apply a function to the element at the specified index, creating a new array, or returning `None` if the index is out of bounds.
 
-### Example
+#### Example
 ```rescript
 [1, 2, 3]->Array.modifyAt(0, n => n + 100) // => Some([101, 2, 3]))
 [1, 2, 3]->Array.modifyAt(100, n => n + 100) // => None
@@ -205,10 +298,10 @@ Apply a function to the element at the specified index, creating a new array, or
 let modifyAt: (array<'a>, int, 'a => 'a) => option<array<'a>>
 
 /**
-## `updateAt`
+### `updateAt`
 Change the element at the specified index, creating a new array, or returning None if the index is out of bounds.
 
-### Example
+#### Example
 ```rescript
 [1, 2, 3]->Array.updateAt(0, 100) // =>Some([100, 2, 3])
 [1, 2, 3]->Array.updateAt(100, 100) // => None
@@ -217,9 +310,9 @@ Change the element at the specified index, creating a new array, or returning No
 let updateAt: (array<'a>, int, 'a) => option<array<'a>>
 
 /**
-## `reverse`
+### `reverse`
 Reverse an array, creating a new array
-### Example
+#### Example
 ```rescript
 [1, 2, 3]->Array.reverse // => [3, 2, 1]
 ```

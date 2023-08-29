@@ -55,7 +55,7 @@ function head(arr) {
 
 function tail(arr) {
   var len = arr.length;
-  return slice(arr, 0, len);
+  return slice(arr, 1, len);
 }
 
 function isEmpty(arr) {

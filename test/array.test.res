@@ -14,6 +14,10 @@ test("filter", _ => {
   [1, 2, 3]->Array.filter(n => n <= 2)->expect->toEqual([1, 2])
 })
 
+test("filterWithIndex", _ => {
+  [1, 2, 3]->Array.filterWithIndex((_, i) => i < 1)->expect->toEqual([1])
+})
+
 test("reduce", _ => {
   [1, 2, 3]->Array.reduce(0, (item, acc) => item + acc)->expect->toEqual(6)
 })

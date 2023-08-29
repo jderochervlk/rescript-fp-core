@@ -45,6 +45,16 @@ Vitest.test("filter", undefined, (function (param) {
             ]);
       }));
 
+Vitest.test("filterWithIndex", undefined, (function (param) {
+        Vitest$1.expect([
+                  1,
+                  2,
+                  3
+                ].filter(function (param, i) {
+                    return i < 1;
+                  })).toEqual([1]);
+      }));
+
 Vitest.test("reduce", undefined, (function (param) {
         Vitest$1.expect(Fp_core__Array.reduce([
                     1,

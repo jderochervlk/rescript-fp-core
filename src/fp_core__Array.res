@@ -7,6 +7,7 @@ open Belt
 @send external mapWithIndex: (array<'a>, ('a, int) => 'b) => array<'b> = "map"
 
 @send external filter: (array<'a>, 'a => bool) => array<'a> = "filter"
+@send external filterWithIndex: (array<'a>, ('a, int) => bool) => array<'a> = "filter"
 
 @send external reduce: (array<'b>, ('a, 'b) => 'a, 'a) => 'a = "reduce"
 let reduce = (arr, init, f) => reduce(arr, f, init)
@@ -79,7 +80,7 @@ let head = arr => arr->get(0)
 
 let tail = arr => {
   let len = arr->length
-  arr->slice(0, len)
+  arr->slice(0 + 1, len)
 }
 
 let isEmpty = arr => {
