@@ -48,6 +48,18 @@ function flatten(arr) {
 
 var lookup = Belt_Array.get;
 
+function slice(arr, start, end) {
+  var len = arr.length;
+  if (len >= end && start < end && start < len) {
+    return arr.slice(start, end);
+  }
+  
+}
+
+function deleteAt(arr, i) {
+  return arr.slice(0, i);
+}
+
 export {
   reduce ,
   reduceWithIndex ,
@@ -60,5 +72,7 @@ export {
   prepend ,
   flatten ,
   lookup ,
+  slice ,
+  deleteAt ,
 }
 /* No side effect */

@@ -112,3 +112,17 @@ test("sort", _ => {
 test("getter", _ => {
   [1, 2, 3][1]->expect->toBe(Some(2))
 })
+
+test("unsafeSlice", _ => {
+  [1, 2, 3, 4]->Array.unsafeSlice(0, 1)->expect->toEqual([1])
+  [1, 2, 3, 4]->Array.unsafeSlice(1, 4)->expect->toEqual([2, 3, 4])
+  [1, 2, 3, 4]->Array.unsafeSlice(10, 20)->expect->toEqual([])
+})
+
+test("slice", _ => {
+  [1, 2, 3, 4]->Array.slice(0, 1)->expect->toEqual(Some([1]))
+  [1, 2, 3, 4]->Array.slice(1, 4)->expect->toEqual(Some([2, 3, 4]))
+  [1, 2, 3, 4]->Array.slice(10, 20)->expect->toEqual(None)
+  [1, 2, 3, 4]->Array.slice(2, 1)->expect->toEqual(None)
+  [1, 2, 3, 4]->Array.slice(0, 10)->expect->toEqual(None)
+})

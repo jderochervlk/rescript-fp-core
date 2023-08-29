@@ -331,6 +331,68 @@ Vitest.test("getter", undefined, (function (param) {
         Vitest$1.expect(2).toBe(2);
       }));
 
+Vitest.test("unsafeSlice", undefined, (function (param) {
+        Vitest$1.expect([
+                  1,
+                  2,
+                  3,
+                  4
+                ].slice(0, 1)).toEqual([1]);
+        Vitest$1.expect([
+                  1,
+                  2,
+                  3,
+                  4
+                ].slice(1, 4)).toEqual([
+              2,
+              3,
+              4
+            ]);
+        Vitest$1.expect([
+                  1,
+                  2,
+                  3,
+                  4
+                ].slice(10, 20)).toEqual([]);
+      }));
+
+Vitest.test("slice", undefined, (function (param) {
+        Vitest$1.expect(Fp_core__Array.slice([
+                    1,
+                    2,
+                    3,
+                    4
+                  ], 0, 1)).toEqual([1]);
+        Vitest$1.expect(Fp_core__Array.slice([
+                    1,
+                    2,
+                    3,
+                    4
+                  ], 1, 4)).toEqual([
+              2,
+              3,
+              4
+            ]);
+        Vitest$1.expect(Fp_core__Array.slice([
+                    1,
+                    2,
+                    3,
+                    4
+                  ], 10, 20)).toEqual(undefined);
+        Vitest$1.expect(Fp_core__Array.slice([
+                    1,
+                    2,
+                    3,
+                    4
+                  ], 2, 1)).toEqual(undefined);
+        Vitest$1.expect(Fp_core__Array.slice([
+                    1,
+                    2,
+                    3,
+                    4
+                  ], 0, 10)).toEqual(undefined);
+      }));
+
 export {
   
 }

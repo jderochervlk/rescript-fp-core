@@ -115,3 +115,36 @@ This function provides a safe way to read a value at a particular index from an 
 It returns a `none` if the index is out of bounds, and a `some` of the element if the index is valid.
 */
 let lookup: (array<'a>, int) => option<'a>
+
+/**
+## `unsafeSlice`
+Similar to `slice` but will return `array<'a>` instead of `Some<array<'a>>` and empty array instead of `None`
+
+```rescript
+[1, 2, 3, 4]->Array.slice(1, 4) // => [2, 3, 4]
+[1, 2, 3, 4]->Array.slice(10, 20) // => []
+```
+*/
+@send
+external unsafeSlice: (array<'a>, int, int) => array<'a> = "slice"
+
+/**
+## `slice`
+Slices the array starting at the first int and ending just before the second int.
+
+Returns `Some<array<'a>>` if start and end are in bounds.
+Returns `None` if start or end are out of bounds, or if start is greater than end.
+
+### Example
+```rescript
+[1, 2, 3, 4]->Array.slice(1, 4) // => Some([2, 3, 4])
+[1, 2, 3, 4]->Array.slice(10, 20) // => None
+```
+*/
+let slice: (array<'a>, int, int) => option<array<'a>>
+
+/**
+deleteAt
+Delete the element at the specified index, creating a new array, or returning None if the index is out of bounds.
+*/
+let deleteAt: (array<'a>, int) => option<array<'a>>

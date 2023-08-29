@@ -74,6 +74,20 @@ external splice: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => a
 
 let lookup = (arr: array<'a>, i): option<'a> => arr[i]
 
+@send external unsafeSlice: (array<'a>, int, int) => array<'a> = "slice"
+
+let slice = (arr, start, end) => {
+  let len = arr->length
+  switch len >= end && start < end && start < len {
+  | true => Some(arr->unsafeSlice(start, end))
+  | false => None
+  }
+}
+
+let deleteAt = (arr, i) => {
+  let head = arr->unsafeSlice(0, i)
+  Some(head)
+}
 // deleteAt
 // insertAt
 
