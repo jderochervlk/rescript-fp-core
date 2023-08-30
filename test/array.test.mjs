@@ -371,7 +371,7 @@ Vitest.test("getter", undefined, (function (param) {
         Vitest$1.expect(2).toBe(2);
       }));
 
-Vitest.test("unsafeSlice", undefined, (function (param) {
+Vitest.test("sliceUnsafe", undefined, (function (param) {
         Vitest$1.expect([
                   1,
                   2,

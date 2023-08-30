@@ -1,4 +1,231 @@
 // Docs come from MDN and fp-ts
+// sorted alphabetically, with the exception of keeping `unsafe` verions after the main version
+
+/**
+### `append`
+
+Append an element to the end of an array, creating a new array.
+
+#### Example
+```rescript
+[2, 3]->Array.append(1) // => [2, 3, 1]
+```
+*/
+let append: (array<'a>, 'a) => array<'a>
+
+/**
+### `concat`
+The concat function is used to merge two or more arrays. This method does not change the existing arrays, but instead returns a new array.
+
+Zero-cost binding to Javascript's `Array.prototype.concat`.
+
+#### Example
+```rescript
+[1, 2, 3]->Array.concat([4, 5, 6])- // => [1, 2, 3, 4, 5, 6]
+```
+*/
+@send
+external concat: (array<'a>, array<'a>) => array<'a> = "concat"
+
+/**
+### `copy`
+This function takes an array and makes a new array containing the same elements.
+
+Zero-cost binding to Javascript's `Array.prototype.slice`.
+
+#### Example
+```rescript
+[1, 2, 3]->Array.copy // => [1, 2, 3]
+```
+*/
+@send
+external copy: array<'a> => array<'a> = "slice"
+
+/**
+### `deleteAt`
+Delete the element at the specified index, creating a new array, or returning None if the index is out of bounds.
+
+#### Example
+```rescript
+[1, 2, 3, 4]->Array.deleteAt(0) // => Some([2, 3, 4])
+[1, 2, 3, 4]->Array.deleteAt(10) // => None
+```
+*/
+let deleteAt: (array<'a>, int) => option<array<'a>>
+
+/**
+### `every`
+every tells if the provided predicate holds true for every element in the Array.
+
+Zero-cost binding to Javascript's `Array.prototype.every`.
+
+#### Example
+```rescript
+[1, 1, 1]->Array.every(n => n == 1) // => true
+[1, 2, 3]->Array.every(n => n == 1) // => false
+```
+*/
+@send
+external every: (array<'a>, 'a => bool) => bool = "every"
+
+/**
+### `filter`
+Given an iterating function that is a Predicate or a Refinement, filter creates a new Array containing the elements of the original Array for which the iterating function is true.
+
+Zero-cost binding to Javascript's `Array.prototype.filter`.
+
+#### Example
+```rescript
+[1, 2, 3]->Array.filter(n => n <= 2) // => [1, 2]
+```
+*/
+@send
+external filter: (array<'a>, 'a => bool) => array<'a> = "filter"
+
+/**
+### `filterWithIndex`
+Similar to `filter` but it includes the item's index.
+
+Zero-cost binding to Javascript's `Array.prototype.filter`.
+
+#### Example
+```rescript
+[1, 2, 3]->Array.filterWithIndex((_, i) => i < 1) // => [1]
+```
+*/
+@send
+external filterWithIndex: (array<'a>, ('a, int) => bool) => array<'a> = "filter"
+
+/**
+### `findFirst`
+
+Find the first element which satisfies a predicate (or a refinement) function.
+It returns an Option containing the element or None if not found.
+
+#### Example
+```rescript
+[1, 2, 3]->Array.findFirst(n => n == 1) // => Some(1)
+[1, 2, 3]->Array.findFirst(n => n == 100) // => None
+```
+*/
+@send
+external findFirst: (array<'a>, 'a => bool) => option<'a> = "find"
+
+/**
+### `findIndex`
+
+findIndex returns an Option containing the first index for which a predicate holds. It returns None if no element satisfies the predicate. Similar to findFirst but returning the index instead of the element.
+
+#### Example
+```rescript
+[1, 2, 3]->Array.findIndex(n => n == 1) // => Some(0)
+[1, 2, 3]->Array.findIndex(n => n == 10) // => None
+```
+*/
+let findIndex: (array<'a>, 'a => bool) => option<int>
+
+/**
+### `findUnsafeIndex`
+
+Returns the index of the first element in an array that satisfies the provided testing function.
+If no elements satisfy the testing function, -1 is returned. 
+
+Zero-cost binding to Javascript's `Array.prototype.findIndex`.
+
+#### Example
+```rescript
+[1, 2, 3]->Array.findUnsafeIndex(n => n == 1)->expect->toEqual(0)
+[1, 2, 3]->Array.findUnsafeIndex(n => n == 10)->expect->toEqual(-1)
+```
+*/
+@send
+external findUnsafeIndex: (array<'a>, 'a => bool) => int = "findIndex"
+
+/**
+### `flatten`
+Takes an array of arrays of `'a` and flattens them into an array of `'a` by concatenating the elements of each array in order.
+
+#### Example
+```rescript
+[[1, 2], [3, 4], [5, 6]]->Array.flatten // => [1, 2, 3, 4, 5, 6]
+```
+*/
+let flatten: array<array<'a>> => array<'a>
+
+/**
+### `get`
+Gets the value from the given index, or `None` if the index is out of bounds.
+
+#### Example
+```rescript
+[1, 2, 3]->Array.get(1) // => Some(2)
+```
+*/
+@get_index
+external get: (array<'a>, int) => option<'a> = ""
+
+/**
+### `head`
+Get the first element in an array, or None if the array is empty
+
+#### Example
+```rescript
+[1, 2, 3]->Array.head // => Some(1)
+[]->Array.head // => None
+*/
+let head: array<'a> => option<'a>
+
+/**
+### `insertAt`
+Inserts an element at the specified index, creating a new array, or returning `None` if the index is out of bounds.
+
+#### Example
+```rescript
+[1, 2, 3, 4]->Array.insertAt(0, 100) // => Some([100, 1, 2, 3, 4])
+[1, 2, 3, 4]->Array.insertAt(10, 100) // => None
+[]->Array.insertAt(0, 100)->expect-> // => Some([100])
+```
+*/
+let insertAt: (array<'a>, int, 'a) => option<array<'a>>
+
+/**
+### `isEmpty`
+Test whether an array is empty
+
+#### Example
+```rescript
+[]->Array.isEmpty // => true
+[1, 2, 3]->Array.isEmpty // => false
+```
+*/
+let isEmpty: array<'a> => bool
+
+/**
+### `last`
+
+Get the last element in an array, or None if the array is empty
+
+#### Example
+```rescript
+[1, 2, 3]->Array.last // => Some(3)
+[]->Array.last // => None
+```
+*/
+let last: array<'a> => option<'a>
+
+/**
+### `length`
+Calculate the number of elements in a Array.
+
+Zero-cost binding to Javascript's `Array.prototype.length`.
+
+#### Example
+```rescript
+[1, 2, 3]->Array.length // => 3
+```
+*/
+@get
+external length: array<'a> => int = "length"
 
 /**
 ### `map`
@@ -29,32 +256,16 @@ Zero-cost binding to Javascript's `Array.prototype.map`.
 external mapWithIndex: (array<'a>, ('a, int) => 'b) => array<'b> = "map"
 
 /**
-### `filter`
-Given an iterating function that is a Predicate or a Refinement, filter creates a new Array containing the elements of the original Array for which the iterating function is true.
-
-Zero-cost binding to Javascript's `Array.prototype.filter`.
+### `modifyAt`
+Apply a function to the element at the specified index, creating a new array, or returning `None` if the index is out of bounds.
 
 #### Example
 ```rescript
-[1, 2, 3]->Array.filter(n => n <= 2) // => [1, 2]
+[1, 2, 3]->Array.modifyAt(0, n => n + 100) // => Some([101, 2, 3]))
+[1, 2, 3]->Array.modifyAt(100, n => n + 100) // => None
 ```
 */
-@send
-external filter: (array<'a>, 'a => bool) => array<'a> = "filter"
-
-/**
-### `filterWithIndex`
-Similar to `filter` but it includes the item's index.
-
-Zero-cost binding to Javascript's `Array.prototype.filter`.
-
-#### Example
-```rescript
-[1, 2, 3]->Array.filterWithIndex((_, i) => i < 1) // => [1]
-```
-*/
-@send
-external filterWithIndex: (array<'a>, ('a, int) => bool) => array<'a> = "filter"
+let modifyAt: (array<'a>, int, 'a => 'a) => option<array<'a>>
 
 /**
 ### `reduce`
@@ -111,153 +322,42 @@ Zero-cost binding to Javascript's `Array.prototype.reduceRight`.
 let reduceRightWithIndex: (array<'a>, 'b, ('b, 'a, int) => 'b) => 'b
 
 /**
-### `get`
-Gets the value from the given index, or `None` if the index is out of bounds.
-
+### `reverse`
+Reverse an array, creating a new array
 #### Example
 ```rescript
-[1, 2, 3]->Array.get(1) // => Some(2)
-```
-*/
-@get_index
-external get: (array<'a>, int) => option<'a> = ""
-
-/**
-### `head`
-Get the first element in an array, or None if the array is empty
-
-#### Example
-```rescript
-[1, 2, 3]->Array.head // => Some(1)
-[]->Array.head // => None
-*/
-let head: array<'a> => option<'a>
-
-/**
-### `tail`
-Get all but the first element of an array, creating a new array, or None if the array is empty
-
-#### Example
-```rescript
-[1, 2, 3]->Array.tail // => Some([2, 3])
-[1]->Array.tail // =>None
-```
-*/
-let tail: array<'a> => option<array<'a>>
-
-/**
-### `isEmpty`
-Test whether an array is empty
-
-#### Example
-```rescript
-[]->Array.isEmpty // => true
-[1, 2, 3]->Array.isEmpty // => false
-```
-*/
-let isEmpty: array<'a> => bool
-
-/**
-### `length`
-Calculate the number of elements in a Array.
-
-Zero-cost binding to Javascript's `Array.prototype.length`.
-
-#### Example
-```rescript
-[1, 2, 3]->Array.length // => 3
-```
-*/
-@get
-external length: array<'a> => int = "length"
-
-/**
-### `concat`
-The concat function is used to merge two or more arrays. This method does not change the existing arrays, but instead returns a new array.
-
-Zero-cost binding to Javascript's `Array.prototype.concat`.
-
-#### Example
-```rescript
-[1, 2, 3]->Array.concat([4, 5, 6])- // => [1, 2, 3, 4, 5, 6]
+[1, 2, 3]->Array.reverse // => [3, 2, 1]
 ```
 */
 @send
-external concat: (array<'a>, array<'a>) => array<'a> = "concat"
+external reverse: array<'a> => array<'a> = "toReversed"
 
 /**
-### `copy`
-This function takes an array and makes a new array containing the same elements.
+### `slice`
+Slices the array starting at the first int and ending just before the second int.
 
-Zero-cost binding to Javascript's `Array.prototype.slice`.
+Returns `Some<array<'a>>` if start and end are in bounds.
+Returns `None` if start or end are out of bounds, or if start is greater than end.
 
 #### Example
 ```rescript
-[1, 2, 3]->Array.copy // => [1, 2, 3]
+[1, 2, 3, 4]->Array.slice(1, 4) // => Some([2, 3, 4])
+[1, 2, 3, 4]->Array.slice(10, 20) // => None
+```
+*/
+let slice: (array<'a>, int, int) => option<array<'a>>
+
+/**
+### `sliceUnsafe`
+Similar to `slice` but will return `array<'a>` instead of `Some<array<'a>>` and empty array instead of `None`
+
+```rescript
+[1, 2, 3, 4]->Array.slice(1, 4) // => [2, 3, 4]
+[1, 2, 3, 4]->Array.slice(10, 20) // => []
 ```
 */
 @send
-external copy: array<'a> => array<'a> = "slice"
-
-/**
-### `every`
-every tells if the provided predicate holds true for every element in the Array.
-
-Zero-cost binding to Javascript's `Array.prototype.every`.
-
-#### Example
-```rescript
-[1, 1, 1]->Array.every(n => n == 1) // => true
-[1, 2, 3]->Array.every(n => n == 1) // => false
-```
-*/
-@send
-external every: (array<'a>, 'a => bool) => bool = "every"
-
-/**
-### `findFirst`
-
-Find the first element which satisfies a predicate (or a refinement) function.
-It returns an Option containing the element or None if not found.
-
-#### Example
-```rescript
-[1, 2, 3]->Array.findFirst(n => n == 1) // => Some(1)
-[1, 2, 3]->Array.findFirst(n => n == 100) // => None
-```
-*/
-@send
-external findFirst: (array<'a>, 'a => bool) => option<'a> = "find"
-
-/**
-### `findUnsafeIndex`
-
-Returns the index of the first element in an array that satisfies the provided testing function.
-If no elements satisfy the testing function, -1 is returned. 
-
-Zero-cost binding to Javascript's `Array.prototype.findIndex`.
-
-#### Example
-```rescript
-[1, 2, 3]->Array.findUnsafeIndex(n => n == 1)->expect->toEqual(0)
-[1, 2, 3]->Array.findUnsafeIndex(n => n == 10)->expect->toEqual(-1)
-```
-*/
-@send
-external findUnsafeIndex: (array<'a>, 'a => bool) => int = "findIndex"
-
-/**
-### `findIndex`
-
-findIndex returns an Option containing the first index for which a predicate holds. It returns None if no element satisfies the predicate. Similar to findFirst but returning the index instead of the element.
-
-#### Example
-```rescript
-[1, 2, 3]->Array.findIndex(n => n == 1) // => Some(0)
-[1, 2, 3]->Array.findIndex(n => n == 10) // => None
-```
-*/
-let findIndex: (array<'a>, 'a => bool) => option<int>
+external sliceUnsafe: (array<'a>, int, int) => array<'a> = "slice"
 
 /**
 ### `some`
@@ -291,73 +391,13 @@ Zero-cost binding to Javascript's `Array.prototype.some`.
 external someWithIndex: (array<'a>, ('a, int) => bool) => bool = "some"
 
 /**
-### `last`
-
-Get the last element in an array, or None if the array is empty
-
-#### Example
-```rescript
-[1, 2, 3]->Array.last // => Some(3)
-[]->Array.last // => None
-```
-*/
-let last: array<'a> => option<'a>
-
-/**
-### `append`
-
-Append an element to the end of an array, creating a new array.
-
-#### Example
-```rescript
-[2, 3]->Array.append(1) // => [2, 3, 1]
-```
-*/
-let append: (array<'a>, 'a) => array<'a>
-
-/**
-### `prepend`
-
-Prepend an element to the start of an array, creating a new array.
-
-#### Example
-```rescript
-[2, 3]->Array.prepend(1) // => [1, 2, 3]
-```
-*/
-let prepend: (array<'a>, 'a) => array<'a>
-
-/**
-### `flatten`
-Takes an array of arrays of `'a` and flattens them into an array of `'a` by concatenating the elements of each array in order.
-
-#### Example
-```rescript
-[[1, 2], [3, 4], [5, 6]]->Array.flatten // => [1, 2, 3, 4, 5, 6]
-```
-*/
-let flatten: array<array<'a>> => array<'a>
-
-/**
-### `splice`
-The splice() function returns a new array with some elements removed and/or replaced at a given index.
-
-#### Example
-```rescript
-[1, 2, 3]->Array.splice(~start=2, ~insert=[7, 8], ~remove=1) // => [1, 2, 7, 8]
-```
-*/
-@variadic
-@send
-external splice: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => array<'a> =
-  "toSpliced"
-
-/**
 ### `sort`
 The sort function returns a sorted copy of the array using a compare function.
 
 The compare function takes in two elements of the array at a time, `(a,b)`
 and it will sort the items depending on the int returned.
+
+Zero-cost binding to Javascript's `Array.prototype.toSorted`.
 
 `> 0` - sort a after b, e.g. [b, a]
 
@@ -374,74 +414,44 @@ and it will sort the items depending on the int returned.
 external sort: (array<'a>, ('a, 'a) => int) => array<'a> = "toSorted"
 
 /**
-This function provides a safe way to read a value at a particular index from an array. 
-It returns a `none` if the index is out of bounds, and a `some` of the element if the index is valid.
-*/
-let lookup: (array<'a>, int) => option<'a>
+### `splice`
+The splice() function returns a new array with some elements removed and/or replaced at a given index.
 
-/**
-### `unsafeSlice`
-Similar to `slice` but will return `array<'a>` instead of `Some<array<'a>>` and empty array instead of `None`
+Zero-cost binding to Javascript's `Array.prototype.toSpliced.
 
+#### Example
 ```rescript
-[1, 2, 3, 4]->Array.slice(1, 4) // => [2, 3, 4]
-[1, 2, 3, 4]->Array.slice(10, 20) // => []
+[1, 2, 3]->Array.splice(~start=2, ~insert=[7, 8], ~remove=1) // => [1, 2, 7, 8]
 ```
 */
+@variadic
 @send
-external unsafeSlice: (array<'a>, int, int) => array<'a> = "slice"
+external splice: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => array<'a> =
+  "toSpliced"
 
 /**
-### `slice`
-Slices the array starting at the first int and ending just before the second int.
-
-Returns `Some<array<'a>>` if start and end are in bounds.
-Returns `None` if start or end are out of bounds, or if start is greater than end.
+### `tail`
+Get all but the first element of an array, creating a new array, or None if the array is empty
 
 #### Example
 ```rescript
-[1, 2, 3, 4]->Array.slice(1, 4) // => Some([2, 3, 4])
-[1, 2, 3, 4]->Array.slice(10, 20) // => None
+[1, 2, 3]->Array.tail // => Some([2, 3])
+[1]->Array.tail // =>None
 ```
 */
-let slice: (array<'a>, int, int) => option<array<'a>>
+let tail: array<'a> => option<array<'a>>
 
 /**
-### `deleteAt`
-Delete the element at the specified index, creating a new array, or returning None if the index is out of bounds.
+### `prepend`
+
+Prepend an element to the start of an array, creating a new array.
 
 #### Example
 ```rescript
-[1, 2, 3, 4]->Array.deleteAt(0) // => Some([2, 3, 4])
-[1, 2, 3, 4]->Array.deleteAt(10) // => None
+[2, 3]->Array.prepend(1) // => [1, 2, 3]
 ```
 */
-let deleteAt: (array<'a>, int) => option<array<'a>>
-
-/**
-### `insertAt`
-Inserts an element at the specified index, creating a new array, or returning `None` if the index is out of bounds.
-
-#### Example
-```rescript
-[1, 2, 3, 4]->Array.insertAt(0, 100) // => Some([100, 1, 2, 3, 4])
-[1, 2, 3, 4]->Array.insertAt(10, 100) // => None
-[]->Array.insertAt(0, 100)->expect-> // => Some([100])
-```
-*/
-let insertAt: (array<'a>, int, 'a) => option<array<'a>>
-
-/**
-### `modifyAt`
-Apply a function to the element at the specified index, creating a new array, or returning `None` if the index is out of bounds.
-
-#### Example
-```rescript
-[1, 2, 3]->Array.modifyAt(0, n => n + 100) // => Some([101, 2, 3]))
-[1, 2, 3]->Array.modifyAt(100, n => n + 100) // => None
-```
-*/
-let modifyAt: (array<'a>, int, 'a => 'a) => option<array<'a>>
+let prepend: (array<'a>, 'a) => array<'a>
 
 /**
 ### `updateAt`
@@ -454,14 +464,3 @@ Change the element at the specified index, creating a new array, or returning No
 ```
 */
 let updateAt: (array<'a>, int, 'a) => option<array<'a>>
-
-/**
-### `reverse`
-Reverse an array, creating a new array
-#### Example
-```rescript
-[1, 2, 3]->Array.reverse // => [3, 2, 1]
-```
-*/
-@send
-external reverse: array<'a> => array<'a> = "toReversed"

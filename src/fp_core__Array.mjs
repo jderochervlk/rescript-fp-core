@@ -48,8 +48,6 @@ function flatten(arr) {
               }), []);
 }
 
-var lookup = Belt_Array.get;
-
 function slice(arr, start, end) {
   var len = arr.length;
   if (len >= end && start < end && start < len) {
@@ -117,23 +115,22 @@ function updateAt(arr, i, item) {
 }
 
 export {
+  append ,
+  deleteAt ,
+  findIndex ,
+  flatten ,
+  head ,
+  insertAt ,
+  isEmpty ,
+  last ,
+  modifyAt ,
   reduce ,
   reduceWithIndex ,
   reduceRight ,
   reduceRightWithIndex ,
-  head ,
-  tail ,
-  isEmpty ,
-  findIndex ,
-  last ,
-  append ,
-  prepend ,
-  flatten ,
-  lookup ,
   slice ,
-  deleteAt ,
-  insertAt ,
-  modifyAt ,
+  tail ,
+  prepend ,
   updateAt ,
 }
 /* No side effect */

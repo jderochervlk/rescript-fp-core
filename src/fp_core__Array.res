@@ -56,7 +56,7 @@ let findIndex = (arr, fn) => {
 external splice: (array<'a>, ~start: int, ~remove: int, ~insert: array<'a>) => array<'a> =
   "toSpliced"
 
-@send external unsafeSlice: (array<'a>, int, int) => array<'a> = "slice"
+@send external sliceUnsafe: (array<'a>, int, int) => array<'a> = "slice"
 
 let last = arr => {
   let index = arr->size - 1
@@ -75,12 +75,10 @@ let flatten = arr => {
   arr->reduce([], (t1, t2) => t1->concat(t2))
 }
 
-let lookup = (arr: array<'a>, i): option<'a> => arr[i]
-
 let slice = (arr, start, end) => {
   let len = arr->length
   switch len >= end && start < end && start < len {
-  | true => Some(arr->unsafeSlice(start, end))
+  | true => Some(arr->sliceUnsafe(start, end))
   | false => None
   }
 }

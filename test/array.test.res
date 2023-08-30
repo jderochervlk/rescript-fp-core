@@ -126,10 +126,10 @@ test("getter", _ => {
   [1, 2, 3][1]->expect->toBe(Some(2))
 })
 
-test("unsafeSlice", _ => {
-  [1, 2, 3, 4]->Array.unsafeSlice(0, 1)->expect->toEqual([1])
-  [1, 2, 3, 4]->Array.unsafeSlice(1, 4)->expect->toEqual([2, 3, 4])
-  [1, 2, 3, 4]->Array.unsafeSlice(10, 20)->expect->toEqual([])
+test("sliceUnsafe", _ => {
+  [1, 2, 3, 4]->Array.sliceUnsafe(0, 1)->expect->toEqual([1])
+  [1, 2, 3, 4]->Array.sliceUnsafe(1, 4)->expect->toEqual([2, 3, 4])
+  [1, 2, 3, 4]->Array.sliceUnsafe(10, 20)->expect->toEqual([])
 })
 
 test("slice", _ => {
