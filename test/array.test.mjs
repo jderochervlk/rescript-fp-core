@@ -138,14 +138,6 @@ Vitest.test("lentgh", undefined, (function (param) {
               ].length).toEqual(3);
       }));
 
-Vitest.test("size", undefined, (function (param) {
-        Vitest$1.expect([
-                1,
-                2,
-                3
-              ].length).toEqual(3);
-      }));
-
 Vitest.test("concat", undefined, (function (param) {
         Vitest$1.expect([
                   1,
@@ -202,9 +194,16 @@ Vitest.test("findFirst", undefined, (function (param) {
                 ].find(function (n) {
                     return n === 1;
                   })).toEqual(1);
+        Vitest$1.expect([
+                  1,
+                  2,
+                  3
+                ].find(function (n) {
+                    return n === 100;
+                  })).toEqual(undefined);
       }));
 
-Vitest.test("findIndex", undefined, (function (param) {
+Vitest.test("findUnsafeIndex", undefined, (function (param) {
         Vitest$1.expect([
                   1,
                   2,
@@ -219,6 +218,23 @@ Vitest.test("findIndex", undefined, (function (param) {
                 ].findIndex(function (n) {
                     return n === 10;
                   })).toEqual(-1);
+      }));
+
+Vitest.test("findIndex", undefined, (function (param) {
+        Vitest$1.expect(Fp_core__Array.findIndex([
+                    1,
+                    2,
+                    3
+                  ], (function (n) {
+                      return n === 1;
+                    }))).toEqual(0);
+        Vitest$1.expect(Fp_core__Array.findIndex([
+                    1,
+                    2,
+                    3
+                  ], (function (n) {
+                      return n === 10;
+                    }))).toEqual(undefined);
       }));
 
 Vitest.test("some", undefined, (function (param) {
@@ -269,9 +285,9 @@ Vitest.test("append", undefined, (function (param) {
                     2,
                     3
                   ], 1)).toEqual([
-              1,
               2,
-              3
+              3,
+              1
             ]);
       }));
 
@@ -280,9 +296,9 @@ Vitest.test("prepend", undefined, (function (param) {
                     2,
                     3
                   ], 1)).toEqual([
+              1,
               2,
-              3,
-              1
+              3
             ]);
       }));
 

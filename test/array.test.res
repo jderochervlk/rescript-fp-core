@@ -58,10 +58,6 @@ test("lentgh", _ => {
   [1, 2, 3]->Array.length->expect->toEqual(3)
 })
 
-test("size", _ => {
-  [1, 2, 3]->Array.size->expect->toEqual(3)
-})
-
 test("concat", _ => {
   [1, 2, 3]->Array.concat([4, 5, 6])->expect->toEqual([1, 2, 3, 4, 5, 6])
 })
@@ -77,11 +73,17 @@ test("every", _ => {
 
 test("findFirst", _ => {
   [1, 2, 3]->Array.findFirst(n => n == 1)->expect->toEqual(Some(1))
+  [1, 2, 3]->Array.findFirst(n => n == 100)->expect->toEqual(None)
+})
+
+test("findUnsafeIndex", _ => {
+  [1, 2, 3]->Array.findUnsafeIndex(n => n == 1)->expect->toEqual(0)
+  [1, 2, 3]->Array.findUnsafeIndex(n => n == 10)->expect->toEqual(-1)
 })
 
 test("findIndex", _ => {
-  [1, 2, 3]->Array.findIndex(n => n == 1)->expect->toEqual(0)
-  [1, 2, 3]->Array.findIndex(n => n == 10)->expect->toEqual(-1)
+  [1, 2, 3]->Array.findIndex(n => n == 1)->expect->toEqual(Some(0))
+  [1, 2, 3]->Array.findIndex(n => n == 10)->expect->toEqual(None)
 })
 
 test("some", _ => {
@@ -100,11 +102,11 @@ test("last", _ => {
 })
 
 test("append", _ => {
-  [2, 3]->Array.append(1)->expect->toEqual([1, 2, 3])
+  [2, 3]->Array.append(1)->expect->toEqual([2, 3, 1])
 })
 
 test("prepend", _ => {
-  [2, 3]->Array.prepend(1)->expect->toEqual([2, 3, 1])
+  [2, 3]->Array.prepend(1)->expect->toEqual([1, 2, 3])
 })
 
 test("flatten", _ => {

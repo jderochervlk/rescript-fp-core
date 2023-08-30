@@ -20,17 +20,26 @@ function reduceRightWithIndex(arr, init, f) {
   return arr.reduceRight(f, init);
 }
 
+function findIndex(arr, fn) {
+  var idx = arr.findIndex(fn);
+  if (idx < 0) {
+    return ;
+  } else {
+    return idx;
+  }
+}
+
 function last(arr) {
   var index = arr.length - 1 | 0;
   return arr[index];
 }
 
 function append(arr, t) {
-  return [t].concat(arr);
+  return arr.concat([t]);
 }
 
 function prepend(arr, t) {
-  return arr.concat([t]);
+  return [t].concat(arr);
 }
 
 function flatten(arr) {
@@ -115,6 +124,7 @@ export {
   head ,
   tail ,
   isEmpty ,
+  findIndex ,
   last ,
   append ,
   prepend ,

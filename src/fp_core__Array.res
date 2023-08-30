@@ -36,7 +36,16 @@ let reduceRightWithIndex = (arr, init, f) => reduceRightWithIndex(arr, f, init)
 
 @send external findFirst: (array<'a>, 'a => bool) => option<'a> = "find"
 
-@send external findIndex: (array<'a>, 'a => bool) => int = "findIndex"
+@send external findUnsafeIndex: (array<'a>, 'a => bool) => int = "findIndex"
+
+let findIndex = (arr, fn) => {
+  let idx = arr->findUnsafeIndex(fn)
+  if idx < 0 {
+    None
+  } else {
+    Some(idx)
+  }
+}
 
 @send external sort: (array<'a>, ('a, 'a) => int) => array<'a> = "toSorted"
 
@@ -55,11 +64,11 @@ let last = arr => {
 }
 
 let append = (arr, t) => {
-  [t]->concat(arr)
+  arr->concat([t])
 }
 
 let prepend = (arr, t) => {
-  arr->concat([t])
+  [t]->concat(arr)
 }
 
 let flatten = arr => {
