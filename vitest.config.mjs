@@ -4,7 +4,8 @@ import rescript from '@jihchi/vite-plugin-rescript'
 export default defineConfig({
   test: {
      include: "./test/*.mjs",
-     reporters: ["tap-flat"]
+     reporters: ["basic"],
+     bail: 1
   },
   plugins: [
     rescript(),
