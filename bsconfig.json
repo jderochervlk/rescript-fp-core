@@ -1,9 +1,14 @@
 {
-  "name": "your-project-name",
+  "name": "rescript-fp-core",
   "sources": [
     {
       "dir": "src",
       "subdirs": true
+    },
+    {
+      "dir": "test",
+      "subdirs": true,
+      "type": "dev"
     }
   ],
   "package-specs": [
@@ -13,5 +18,14 @@
     }
   ],
   "suffix": ".mjs",
-  "bs-dependencies": []
+  "bs-dependencies": [
+  ],
+  "bs-dev-dependencies": [
+    "rescript-vitest"
+  ],
+  "warnings": {
+    "number": "-44"
+  },
+  "ppx-flags": [
+  ]
 }
