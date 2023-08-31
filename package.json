@@ -1,44 +1,16 @@
 {
   "name": "rescript-fp-core",
+  "version": "1.0.0-alpha.1",
   "description": "A standard library for ReScript with a focus on Functional Programming",
   "main": "src/index.mjs",
-  "private": true,
-  "version": "1.0.0",
-  "author": "Josh Vlk <josh@vlkpack.com>",
-  "license": "MIT",
-  "engines": {
-    "node": "16.x"
-  },
-  "dependencies": {
-    "@headlessui/react": "^1.2.0",
-    "@mdx-js/loader": "^1.5.5",
-    "@next/mdx": "^8.1.0",
-    "@rescript/react": "^0.10.3",
-    "@ryyppy/rescript-promise": "2.1.0",
-    "codemirror": "^5.54.0",
-    "docson": "^2.1.0",
-    "fuse.js": "^6.4.3",
-    "gentype": "^3.44.0",
-    "glob": "^7.1.4",
-    "gray-matter": "^4.0.2",
-    "highlight.js": "^10.5.0",
-    "lz-string": "^1.4.4",
-    "next": "10.2.3",
-    "next-transpile-modules": "7.1.2",
-    "postcss": "^8.3.0",
-    "prettier": "^1.18.2",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "remark-parse": "^7.0.1",
-    "remark-slug": "^5.1.2",
-    "remark-stringify": "^7.0.3",
-    "request": "^2.88.0",
-    "stringify-object": "^3.3.0",
-    "unified": "^8.4.0"
-  },
   "scripts": {
     "res:build": "rescript",
     "res:dev": "rescript build -w"
   },
-  "keywords": []
+  "keywords": [],
+  "author": "josh@vlkpack.com",
+  "license": "MIT",
+  "dependencies": {
+    "rescript": "^10.1.4"
+  }
 }
