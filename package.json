@@ -1,6 +1,6 @@
 {
   "name": "rescript-fp-core",
-  "version": "1.0.0-alpha.6",
+  "version": "1.0.0",
   "description": "A standard library for ReScript with a focus on Functional Programming",
   "keywords": [
     "rescript",
