@@ -59,3 +59,17 @@ test("map", _ => {
   Some(42)->Option.map(n => n + 10)->expect->toEqual(Some(52))
   None->Option.map(n => n + 10)->expect->toEqual(None)
 })
+
+test("orElseRun", _ => {
+  let t1 = []
+  let t2 = []
+  None->Option.orElseRun(() => {
+    let _t = t1->Js.Array2.push(42)
+  })
+  t1->expect->toEqual([42])
+
+  Some(42)->Option.orElseRun(n => {
+    let _t = t2->Js.Array2.push(n)
+  })
+  t2->expect->toEqual([])
+})

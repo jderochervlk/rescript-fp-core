@@ -67,6 +67,14 @@ function map(opt, f) {
   
 }
 
+function orElseRun(opt, f) {
+  if (opt !== undefined) {
+    return ;
+  } else {
+    return Curry._1(f, undefined);
+  }
+}
+
 export {
   catchMap ,
   chain ,
@@ -77,5 +85,6 @@ export {
   isNone ,
   isSome ,
   map ,
+  orElseRun ,
 }
 /* No side effect */

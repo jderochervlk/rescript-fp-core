@@ -95,6 +95,19 @@ Vitest.test("map", undefined, (function (param) {
                     }))).toEqual(undefined);
       }));
 
+Vitest.test("orElseRun", undefined, (function (param) {
+        var t1 = [];
+        var t2 = [];
+        Fp_core__Option.orElseRun(undefined, (function (param) {
+                t1.push(42);
+              }));
+        Vitest$1.expect(t1).toEqual([42]);
+        Fp_core__Option.orElseRun(42, (function (n) {
+                t2.push(n);
+              }));
+        Vitest$1.expect(t2).toEqual([]);
+      }));
+
 export {
   
 }

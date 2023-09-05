@@ -105,3 +105,16 @@ None->Option.map(n => n + 10) // => None
 ```
 */
 let map: (option<'a>, 'a => 'b) => option<'b>
+
+/**
+### orElseRun
+Invoke a parameterless side-effecting function if the option is None.
+
+#### Example
+```rescript
+#### Example
+```rescript
+None->Option.forEach(() => Js.Console.log(42)) // => logs 42 to the console
+```
+*/
+let orElseRun: (option<'a>, unit => unit) => unit

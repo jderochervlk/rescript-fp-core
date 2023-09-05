@@ -55,3 +55,9 @@ let map = (opt, f) =>
   | Some(x) => Some(f(x))
   | None => None
   }
+
+let orElseRun = (opt, f) =>
+  switch opt {
+  | None => f()
+  | Some(_) => ()
+  }
