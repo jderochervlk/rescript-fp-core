@@ -7,9 +7,66 @@ var $$Option;
 
 var $$Promise;
 
+var Int;
+
+var $$BigInt;
+
+var Console;
+
+var Dict;
+
+var $$Error;
+
+var Float;
+
+var Iterator;
+
+var $$JSON;
+
+var List;
+
+var $$Map;
+
+var $$Math;
+
+var Ordering;
+
+var $$RegExp;
+
+var $$Set;
+
+var $$Symbol;
+
+var Type;
+
+var $$WeakMap;
+
+var $$WeakSet;
+
+var $$Intl;
+
 export {
   $$Array ,
   $$Option ,
   $$Promise ,
+  Int ,
+  $$BigInt ,
+  Console ,
+  Dict ,
+  $$Error ,
+  Float ,
+  Iterator ,
+  $$JSON ,
+  List ,
+  $$Map ,
+  $$Math ,
+  Ordering ,
+  $$RegExp ,
+  $$Set ,
+  $$Symbol ,
+  Type ,
+  $$WeakMap ,
+  $$WeakSet ,
+  $$Intl ,
 }
 /* No side effect */
