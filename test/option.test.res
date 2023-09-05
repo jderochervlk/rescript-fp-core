@@ -60,6 +60,16 @@ test("map", _ => {
   None->Option.map(n => n + 10)->expect->toEqual(None)
 })
 
+test("map2", _ => {
+  let sum = (n1, n2) => n1 + n2
+  Some(42)->Option.map2(Some(100), sum)->expect->toEqual(Some(142))
+})
+
+test("map2", _ => {
+  let sum = (n1, n2, n3) => n1 + n2 + n3
+  Some(42)->Option.map3(Some(100), Some(100), sum)->expect->toEqual(Some(242))
+})
+
 test("orElseRun", _ => {
   let t1 = []
   let t2 = []

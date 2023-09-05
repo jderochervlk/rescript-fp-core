@@ -67,6 +67,49 @@ function map(opt, f) {
   
 }
 
+function map2(opt1, opt2, f) {
+  var match = [
+    opt1,
+    opt2
+  ];
+  if (match.length !== 2) {
+    return ;
+  }
+  var x1 = match[0];
+  if (x1 === undefined) {
+    return ;
+  }
+  var x2 = match[1];
+  if (x2 !== undefined) {
+    return Caml_option.some(Curry._2(f, Caml_option.valFromOption(x1), Caml_option.valFromOption(x2)));
+  }
+  
+}
+
+function map3(opt1, opt2, opt3, f) {
+  var match = [
+    opt1,
+    opt2,
+    opt3
+  ];
+  if (match.length !== 3) {
+    return ;
+  }
+  var x1 = match[0];
+  if (x1 === undefined) {
+    return ;
+  }
+  var x2 = match[1];
+  if (x2 === undefined) {
+    return ;
+  }
+  var x3 = match[2];
+  if (x3 !== undefined) {
+    return Caml_option.some(Curry._3(f, Caml_option.valFromOption(x1), Caml_option.valFromOption(x2), Caml_option.valFromOption(x3)));
+  }
+  
+}
+
 function orElseRun(opt, f) {
   if (opt !== undefined) {
     return ;
@@ -85,6 +128,8 @@ export {
   isNone ,
   isSome ,
   map ,
+  map2 ,
+  map3 ,
   orElseRun ,
 }
 /* No side effect */

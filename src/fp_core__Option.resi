@@ -107,11 +107,33 @@ None->Option.map(n => n + 10) // => None
 let map: (option<'a>, 'a => 'b) => option<'b>
 
 /**
-### orElseRun
-Invoke a parameterless side-effecting function if the option is None.
+### map2
+Takes a function `('a, 'b) => 'c` and applies that function to the values inside the options and returns another option.
 
 #### Example
 ```rescript
+let sum = (n1, n2) => n1 + n2
+Some(42)->Option.map2(Some(100), sum) // => Some(142)
+```
+*/
+let map2: (option<'a>, option<'a>, ('a, 'a) => 'b) => option<'b>
+
+/**
+### map3
+Takes a function `('a, 'b) => 'c` and applies that function to the values inside the options and returns another option.
+
+#### Example
+```rescript
+let sum = (n1, n2, n3) => n1 + n2 + n3
+Some(42)->Option.map3(Some(100), Some(100), sum) // => Some(242)
+```
+*/
+let map3: (option<'a>, option<'a>, option<'a>, ('a, 'a, 'a) => 'b) => option<'b>
+
+/**
+### orElseRun
+Invoke a parameterless side-effecting function if the option is None.
+
 #### Example
 ```rescript
 None->Option.forEach(() => Js.Console.log(42)) // => logs 42 to the console

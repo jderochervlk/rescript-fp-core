@@ -56,6 +56,18 @@ let map = (opt, f) =>
   | None => None
   }
 
+let map2 = (opt1, opt2, f) =>
+  switch [opt1, opt2] {
+  | [Some(x1), Some(x2)] => Some(f(x1, x2))
+  | _ => None
+  }
+
+let map3 = (opt1, opt2, opt3, f) =>
+  switch [opt1, opt2, opt3] {
+  | [Some(x1), Some(x2), Some(x3)] => Some(f(x1, x2, x3))
+  | _ => None
+  }
+
 let orElseRun = (opt, f) =>
   switch opt {
   | None => f()

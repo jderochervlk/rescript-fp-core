@@ -95,6 +95,20 @@ Vitest.test("map", undefined, (function (param) {
                     }))).toEqual(undefined);
       }));
 
+Vitest.test("map2", undefined, (function (param) {
+        var sum = function (n1, n2) {
+          return n1 + n2 | 0;
+        };
+        Vitest$1.expect(Fp_core__Option.map2(42, 100, sum)).toEqual(142);
+      }));
+
+Vitest.test("map2", undefined, (function (param) {
+        var sum = function (n1, n2, n3) {
+          return (n1 + n2 | 0) + n3 | 0;
+        };
+        Vitest$1.expect(Fp_core__Option.map3(42, 100, 100, sum)).toEqual(242);
+      }));
+
 Vitest.test("orElseRun", undefined, (function (param) {
         var t1 = [];
         var t2 = [];
