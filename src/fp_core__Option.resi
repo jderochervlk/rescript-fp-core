@@ -175,7 +175,7 @@ Invoke a parameterless side-effecting function if the option is None.
 
 #### Example
 ```rescript
-None->Option.forEach(() => Js.Console.log(42)) // => logs 42 to the console
+None->Option.orElseRun(() => Js.Console.log(42)) // => logs 42 to the console
 ```
 */
 let orElseRun: (option<'a>, unit => unit) => unit
