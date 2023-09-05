@@ -60,6 +60,27 @@ function isSome(opt) {
   return opt !== undefined;
 }
 
+function liftA1(f, opt) {
+  if (opt !== undefined) {
+    return Caml_option.some(Curry._1(f, Caml_option.valFromOption(opt)));
+  }
+  
+}
+
+function liftA2(f, opt1, opt2) {
+  if (opt1 !== undefined && opt2 !== undefined) {
+    return Caml_option.some(Curry._2(f, Caml_option.valFromOption(opt1), Caml_option.valFromOption(opt2)));
+  }
+  
+}
+
+function liftA3(f, opt1, opt2, opt3) {
+  if (opt1 !== undefined && opt2 !== undefined && opt3 !== undefined) {
+    return Caml_option.some(Curry._3(f, Caml_option.valFromOption(opt1), Caml_option.valFromOption(opt2), Caml_option.valFromOption(opt3)));
+  }
+  
+}
+
 function map(opt, f) {
   if (opt !== undefined) {
     return Caml_option.some(Curry._1(f, Caml_option.valFromOption(opt)));
@@ -68,44 +89,15 @@ function map(opt, f) {
 }
 
 function map2(opt1, opt2, f) {
-  var match = [
-    opt1,
-    opt2
-  ];
-  if (match.length !== 2) {
-    return ;
-  }
-  var x1 = match[0];
-  if (x1 === undefined) {
-    return ;
-  }
-  var x2 = match[1];
-  if (x2 !== undefined) {
-    return Caml_option.some(Curry._2(f, Caml_option.valFromOption(x1), Caml_option.valFromOption(x2)));
+  if (opt1 !== undefined && opt2 !== undefined) {
+    return Caml_option.some(Curry._2(f, Caml_option.valFromOption(opt1), Caml_option.valFromOption(opt2)));
   }
   
 }
 
 function map3(opt1, opt2, opt3, f) {
-  var match = [
-    opt1,
-    opt2,
-    opt3
-  ];
-  if (match.length !== 3) {
-    return ;
-  }
-  var x1 = match[0];
-  if (x1 === undefined) {
-    return ;
-  }
-  var x2 = match[1];
-  if (x2 === undefined) {
-    return ;
-  }
-  var x3 = match[2];
-  if (x3 !== undefined) {
-    return Caml_option.some(Curry._3(f, Caml_option.valFromOption(x1), Caml_option.valFromOption(x2), Caml_option.valFromOption(x3)));
+  if (opt1 !== undefined && opt2 !== undefined && opt3 !== undefined) {
+    return Caml_option.some(Curry._3(f, Caml_option.valFromOption(opt1), Caml_option.valFromOption(opt2), Caml_option.valFromOption(opt3)));
   }
   
 }
@@ -127,6 +119,9 @@ export {
   getOrElse ,
   isNone ,
   isSome ,
+  liftA1 ,
+  liftA2 ,
+  liftA3 ,
   map ,
   map2 ,
   map3 ,

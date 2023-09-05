@@ -95,6 +95,45 @@ None->Option.isNone // => true
 let isSome: option<'a> => bool
 
 /**
+### liftA1
+converts a function `('a) => 'b` to `(option<'a>) => option<'b>`
+
+#### Example
+```rescript
+let increment = n => n + 1
+let liftedIncrement = Option.liftA1(increment)
+Some(42)->liftedIncrement // => Some(43)
+```
+*/
+let liftA1: ('a => 'b, option<'a>) => option<'b>
+
+/**
+### liftA2
+converts a function `('a, 'b) => 'c` to `(option<'a>, option<'b>) => option<'c>`
+
+#### Example
+```rescript
+let sum = (n1, n2) => n1 + n2
+let liftedSum = Option.liftA2(sum)
+liftedSum(Some(100), Some(42)) // => Some(142)
+```
+*/
+let liftA2: (('a, 'b) => 'c, option<'a>, option<'b>) => option<'c>
+
+/**
+### liftA3
+converts a function `('a) => 'b` to `(option<'a>) => option<'b>`
+
+#### Example
+```rescript
+let sum = (n1, n2, n3) => n1 + n2 + n3
+let liftedSum = Option.liftA3(sum)
+liftedSum(Some(100), Some(42), Some(100)) // => Some(242)
+```
+*/
+let liftA3: (('a, 'b, 'c) => 'd, option<'a>, option<'b>, option<'c>) => option<'d>
+
+/**
 ### map
 Takes a function `'a => 'b` and applies that function to the value inside the option and returns another option.
 
@@ -116,11 +155,11 @@ let sum = (n1, n2) => n1 + n2
 Some(42)->Option.map2(Some(100), sum) // => Some(142)
 ```
 */
-let map2: (option<'a>, option<'a>, ('a, 'a) => 'b) => option<'b>
+let map2: (option<'a>, option<'b>, ('a, 'b) => 'c) => option<'c>
 
 /**
 ### map3
-Takes a function `('a, 'b) => 'c` and applies that function to the values inside the options and returns another option.
+Takes a function `('a, 'b, 'c) => 'd` and applies that function to the values inside the options and returns another option.
 
 #### Example
 ```rescript
@@ -128,7 +167,7 @@ let sum = (n1, n2, n3) => n1 + n2 + n3
 Some(42)->Option.map3(Some(100), Some(100), sum) // => Some(242)
 ```
 */
-let map3: (option<'a>, option<'a>, option<'a>, ('a, 'a, 'a) => 'b) => option<'b>
+let map3: (option<'a>, option<'b>, option<'c>, ('a, 'b, 'c) => 'd) => option<'d>
 
 /**
 ### orElseRun

@@ -50,6 +50,24 @@ let isSome = opt =>
   | None => false
   }
 
+let liftA1 = (f, opt) =>
+  switch opt {
+  | Some(x) => Some(f(x))
+  | None => None
+  }
+
+let liftA2 = (f, opt1, opt2) =>
+  switch (opt1, opt2) {
+  | (Some(x1), Some(x2)) => Some(f(x1, x2))
+  | _ => None
+  }
+
+let liftA3 = (f, opt1, opt2, opt3) =>
+  switch (opt1, opt2, opt3) {
+  | (Some(x1), Some(x2), Some(x3)) => Some(f(x1, x2, x3))
+  | _ => None
+  }
+
 let map = (opt, f) =>
   switch opt {
   | Some(x) => Some(f(x))
@@ -57,14 +75,14 @@ let map = (opt, f) =>
   }
 
 let map2 = (opt1, opt2, f) =>
-  switch [opt1, opt2] {
-  | [Some(x1), Some(x2)] => Some(f(x1, x2))
+  switch (opt1, opt2) {
+  | (Some(x1), Some(x2)) => Some(f(x1, x2))
   | _ => None
   }
 
 let map3 = (opt1, opt2, opt3, f) =>
-  switch [opt1, opt2, opt3] {
-  | [Some(x1), Some(x2), Some(x3)] => Some(f(x1, x2, x3))
+  switch (opt1, opt2, opt3) {
+  | (Some(x1), Some(x2), Some(x3)) => Some(f(x1, x2, x3))
   | _ => None
   }
 

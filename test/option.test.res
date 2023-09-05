@@ -55,6 +55,24 @@ test("isSome", _ => {
   None->Option.isSome->expect->toBe(false)
 })
 
+test("liftA1", _ => {
+  let increment = n => n + 1
+  let liftedIncrement = Option.liftA1(increment)
+  Some(42)->liftedIncrement->expect->toEqual(Some(43))
+})
+
+test("liftA2", _ => {
+  let sum = (n1, n2) => n1 + n2
+  let liftedSum = Option.liftA2(sum)
+  liftedSum(Some(100), Some(42))->expect->toEqual(Some(142))
+})
+
+test("liftA3", _ => {
+  let sum = (n1, n2, n3) => n1 + n2 + n3
+  let liftedSum = Option.liftA3(sum)
+  liftedSum(Some(100), Some(42), Some(100))->expect->toEqual(Some(242))
+})
+
 test("map", _ => {
   Some(42)->Option.map(n => n + 10)->expect->toEqual(Some(52))
   None->Option.map(n => n + 10)->expect->toEqual(None)
@@ -63,9 +81,15 @@ test("map", _ => {
 test("map2", _ => {
   let sum = (n1, n2) => n1 + n2
   Some(42)->Option.map2(Some(100), sum)->expect->toEqual(Some(142))
+
+  let showNumber = (str, n2) => str ++ n2->Js.Int.toString
+  Some("The number is ")
+  ->Option.map2(Some(100), showNumber)
+  ->expect
+  ->toEqual(Some("The number is 100"))
 })
 
-test("map2", _ => {
+test("map3", _ => {
   let sum = (n1, n2, n3) => n1 + n2 + n3
   Some(42)->Option.map3(Some(100), Some(100), sum)->expect->toEqual(Some(242))
 })

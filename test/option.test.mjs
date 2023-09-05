@@ -86,6 +86,30 @@ Vitest.test("isSome", undefined, (function (param) {
         Vitest$1.expect(Fp_core__Option.isSome(undefined)).toBe(false);
       }));
 
+Vitest.test("liftA1", undefined, (function (param) {
+        var increment = function (n) {
+          return n + 1 | 0;
+        };
+        Vitest$1.expect(Fp_core__Option.liftA1(increment, 42)).toEqual(43);
+      }));
+
+Vitest.test("liftA2", undefined, (function (param) {
+        var sum = function (n1, n2) {
+          return n1 + n2 | 0;
+        };
+        Vitest$1.expect(Fp_core__Option.liftA2(sum, 100, 42)).toEqual(142);
+      }));
+
+Vitest.test("liftA3", undefined, (function (param) {
+        var sum = function (n1, n2, n3) {
+          return (n1 + n2 | 0) + n3 | 0;
+        };
+        var liftedSum = function (param, param$1, param$2) {
+          return Fp_core__Option.liftA3(sum, param, param$1, param$2);
+        };
+        Vitest$1.expect(liftedSum(100, 42, 100)).toEqual(242);
+      }));
+
 Vitest.test("map", undefined, (function (param) {
         Vitest$1.expect(Fp_core__Option.map(42, (function (n) {
                       return n + 10 | 0;
@@ -100,9 +124,13 @@ Vitest.test("map2", undefined, (function (param) {
           return n1 + n2 | 0;
         };
         Vitest$1.expect(Fp_core__Option.map2(42, 100, sum)).toEqual(142);
+        var showNumber = function (str, n2) {
+          return str + n2.toString();
+        };
+        Vitest$1.expect(Fp_core__Option.map2("The number is ", 100, showNumber)).toEqual("The number is 100");
       }));
 
-Vitest.test("map2", undefined, (function (param) {
+Vitest.test("map3", undefined, (function (param) {
         var sum = function (n1, n2, n3) {
           return (n1 + n2 | 0) + n3 | 0;
         };
