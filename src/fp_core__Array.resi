@@ -1,8 +1,8 @@
 // Docs come from MDN and fp-ts
-// sorted alphabetically, with the exception of keeping `unsafe` verions after the main version
+// sorted alphabetically, with the exception of keeping `unsafe` versions after the main version
 
 /**
-### `append`
+### append
 
 Append an element to the end of an array, creating a new array.
 
@@ -14,7 +14,7 @@ Append an element to the end of an array, creating a new array.
 let append: (array<'a>, 'a) => array<'a>
 
 /**
-### `concat`
+### concat
 The concat function is used to merge two or more arrays. This method does not change the existing arrays, but instead returns a new array.
 
 Zero-cost binding to Javascript's `Array.prototype.concat`.
@@ -417,7 +417,7 @@ external sort: (array<'a>, ('a, 'a) => int) => array<'a> = "toSorted"
 ### `splice`
 The splice() function returns a new array with some elements removed and/or replaced at a given index.
 
-Zero-cost binding to Javascript's `Array.prototype.toSpliced.
+Zero-cost binding to Javascript's `Array.prototype.toSpliced`.
 
 #### Example
 ```rescript
