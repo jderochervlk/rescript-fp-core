@@ -5,8 +5,11 @@ var $$Array;
 
 var $$Option;
 
+var $$Promise;
+
 export {
   $$Array ,
   $$Option ,
+  $$Promise ,
 }
 /* No side effect */

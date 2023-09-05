@@ -19,6 +19,7 @@
   ],
   "suffix": ".mjs",
   "bs-dependencies": [
+    "@rescript/core"
   ],
   "bs-dev-dependencies": [
     "rescript-vitest"
@@ -26,6 +27,5 @@
   "warnings": {
     "number": "-44"
   },
-  "ppx-flags": [
-  ]
+  "ppx-flags": []
 }
