@@ -3,7 +3,10 @@
 
 var $$Array;
 
+var $$Option;
+
 export {
   $$Array ,
+  $$Option ,
 }
 /* No side effect */
