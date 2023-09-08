@@ -5,7 +5,7 @@ export default defineConfig({
   test: {
      include: "./test/*.mjs",
      reporters: ["basic"],
-     bail: 1
+     bail: 1,
   },
   plugins: [
     rescript(),
