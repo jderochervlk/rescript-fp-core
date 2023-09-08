@@ -6,6 +6,9 @@ export default defineConfig({
      include: "./test/*.mjs",
      reporters: ["basic"],
      bail: 1,
+     coverage: {
+      reporter: "json-summary"
+     }
   },
   plugins: [
     rescript(),
