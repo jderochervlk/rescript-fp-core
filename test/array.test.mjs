@@ -550,6 +550,22 @@ Vitest.test("reverse", undefined, (function (param) {
             ]);
       }));
 
+Vitest.test("forEach", undefined, (function (param) {
+        var t1 = [];
+        Fp_core__Array.forEach([
+              1,
+              2,
+              3
+            ], (function (x) {
+                t1.push(x);
+              }));
+        Vitest$1.expect(t1).toEqual([
+              1,
+              2,
+              3
+            ]);
+      }));
+
 export {
   
 }

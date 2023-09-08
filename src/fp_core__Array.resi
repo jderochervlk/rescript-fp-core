@@ -155,6 +155,11 @@ let flatten: array<array<'a>> => array<'a>
 /**
 ### forEach
 Executes a provided function once for each array element. 
+
+#### Example
+```rescript
+[1, 2, 3]->Array.forEach(Console.log) // logs 1,2,3 to the console
+```
 */
 let forEach: (array<'a>, 'a => unit) => unit
 
