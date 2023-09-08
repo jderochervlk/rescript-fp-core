@@ -114,11 +114,16 @@ function updateAt(arr, i, item) {
   
 }
 
+function forEach(prim0, prim1) {
+  prim0.forEach(prim1);
+}
+
 export {
   append ,
   deleteAt ,
   findIndex ,
   flatten ,
+  forEach ,
   head ,
   insertAt ,
   isEmpty ,

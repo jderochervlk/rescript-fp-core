@@ -140,6 +140,8 @@ let updateAt = (arr, i, item) => {
   }
 }
 
+@send external forEach: (array<'a>, 'a => unit) => unit = "forEach"
+
 // next release
 // chop
 // compact

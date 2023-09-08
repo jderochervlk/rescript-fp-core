@@ -1,0 +1,118 @@
+// functions to work with JS Objects
+
+/**
+### deleteAt
+Delete a key and value from an object.
+
+#### Example
+```rescript
+let t1 = {"foo": "bar", "bar": "foo"} // does not mutate
+let t2 = t1->Object.deleteAt("bar") // => {"foo": "bar"}
+```
+*/
+let deleteAt: ({..}, string) => {..}
+
+/**
+### has
+Test whether or not a key exists in an object.
+
+#### Example
+```rescript
+let point = {"x": 1, "y": 2}
+{"a": 1}->Object.has("a") // => true
+{"a": 1}->Object.has("b") // => false
+{"a": 1}->Object.has("toString") // => false
+```
+*/
+@val
+external has: ({..}, string) => bool = "Object.prototype.hasOwnProperty.call"
+
+/**
+### isEmpty
+Test whether an Object is empty.
+
+#### Example
+```rescript
+%raw("{}")->Object.isEmpty // => true
+{"foo": "bar"}->Object.isEmpty // => false
+```
+*/
+let isEmpty: {..} => bool
+
+/**
+### filter
+Given a Predicate, it produces a new Object keeping only the entries with a value that satisfies the provided predicate.
+
+#### Example
+```rescript
+{"one": 1, "two": 2}->Object.filter(n => n < 2) // => {"one": 1}
+```
+*/
+let filter: ({..}, 'a => bool) => {..}
+
+/**
+### get
+Gets the value of a property by name. Returns `None` if the property does not exist or has the value `undefined`. Otherwise returns `Some`, including if the value is `null`.
+
+#### Example
+
+```rescript
+{"a": 1}->Object.get("a") // => Some(1)
+{"a": 1}->Object.get("b") // => None
+```
+*/
+@get_index
+external get: ({..}, string) => option<'a> = ""
+
+/**
+### keysToArray
+Returns an array of an object's own enumerable string-keyed property names. See [ECMAScript Language Specification](https://tc39.es/ecma262/multipage/fundamental-objects.html#sec-object.keys) 
+or [Object.keys on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys).
+
+#### Example
+
+```rescript
+{"a": 1, "b": 2}->Object.keysToArray // => ["a", "b"]
+{"a": None}->Object.keysToArray // => ["a"]
+Object.empty()->Object.keysToArray // => []
+```
+*/
+@val
+external keysToArray: {..} => array<string> = "Object.keys"
+
+/**
+### map
+Map an object passing the values to the iterating function.
+
+#### Example
+```rescript
+let t1 = {"a": 1, "b": 2} // does not mutate
+let t2 = t1->Object.map(n => n + 10) // => {"a": 11, "b": 12}
+```
+*/
+let map: ({..}, 'a => 'b) => {..}
+
+/**
+### merge
+Merges two objects together without mutating either source object.
+
+#### Example
+```rescript
+let t1 = {"foo": "bar"} // does not mutate
+let t2 = {"bar": "foo"} // does not mutate
+let t3 = Object.merge(t1, t2) // => {"foo": "bar", "bar": "foo"}
+```
+*/
+let merge: ({..}, {..}) => {..}
+
+/**
+### set
+Set a key to a new value on an object. Returns an updated copy of the object and does not mutate the input object.
+
+#### Example
+```rescript
+let t1 = {"foo": "bar"} // this does not mutate
+let t2 = t1->Object.set("foo", "new") // => { "foo": "new" }
+```
+*/
+let set: ({..}, string, 'a) => {..}
