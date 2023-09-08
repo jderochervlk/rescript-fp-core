@@ -153,6 +153,12 @@ Takes an array of arrays of `'a` and flattens them into an array of `'a` by conc
 let flatten: array<array<'a>> => array<'a>
 
 /**
+### forEach
+Executes a provided function once for each array element. 
+*/
+let forEach: (array<'a>, 'a => unit) => unit
+
+/**
 ### `get`
 Gets the value from the given index, or `None` if the index is out of bounds.
 

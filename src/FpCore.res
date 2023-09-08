@@ -1,5 +1,7 @@
 module Array = Fp_core__Array
+module Either = Fp_core__Either
 module Option = Fp_core__Option
+module Object = Fp_core__Object
 
 // passthroughs to RescriptCore
 module Promise = RescriptCore.Promise

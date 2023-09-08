@@ -3,7 +3,11 @@
 
 var $$Array;
 
+var Either;
+
 var $$Option;
+
+var $$Object;
 
 var $$Promise;
 
@@ -47,7 +51,9 @@ var $$Intl;
 
 export {
   $$Array ,
+  Either ,
   $$Option ,
+  $$Object ,
   $$Promise ,
   Int ,
   $$BigInt ,
