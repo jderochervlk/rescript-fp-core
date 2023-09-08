@@ -7,7 +7,11 @@ export default defineConfig({
      reporters: ["basic"],
      bail: 1,
      coverage: {
-      reporter: ["json-summary", "json"]
+      reporter: ["json-summary", "json"],
+      functions: 90,
+      lines: 90,
+      statements: 90,
+      branches: 90
      }
   },
   plugins: [
