@@ -168,3 +168,11 @@ test("updateAt", _ => {
 test("reverse", _ => {
   [1, 2, 3]->Array.reverse->expect->toEqual([3, 2, 1])
 })
+
+test("forEach", _ => {
+  let t1 = []
+  [1, 2, 3]->Array.forEach(x => {
+    let _x1 = t1->Js.Array2.push(x)
+  })
+  t1->expect->toEqual([1, 2, 3])
+})
